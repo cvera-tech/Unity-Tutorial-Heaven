@@ -4,6 +4,7 @@ public class Delivery : MonoBehaviour
 {
 
     private bool hasPackage = false;
+    [SerializeField] float packageDestroyDelay = 0f;
     void OnCollisionEnter2D()
     {
         Debug.Log("Oof.");
@@ -15,6 +16,7 @@ public class Delivery : MonoBehaviour
         {
             hasPackage = true;
             Debug.Log("Package acquired.");
+            Destroy(other.gameObject, packageDestroyDelay);
         }
         else if (other.CompareTag("Customer") && hasPackage)
         {
