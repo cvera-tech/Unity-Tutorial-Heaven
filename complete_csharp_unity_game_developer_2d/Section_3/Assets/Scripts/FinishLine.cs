@@ -5,6 +5,7 @@ public class FinishLine : MonoBehaviour
 {
     // [SerializeField] GameObject startPositionObject;
     [SerializeField] float reloadSceneDelay = 1f;
+    [SerializeField] ParticleSystem finishLineParticleSystem;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -15,7 +16,8 @@ public class FinishLine : MonoBehaviour
             // player.transform.SetPositionAndRotation(startPosition, startRotation);
             // player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             // player.GetComponent<Rigidbody2D>().angularVelocity = 0;
-            Invoke("ReloadScene", reloadSceneDelay);
+            finishLineParticleSystem.Play();
+            Invoke(nameof(ReloadScene), reloadSceneDelay);
         }
     }
 
