@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CrashDetection : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class CrashDetection : MonoBehaviour
     {
         if (other.CompareTag("Ground"))
         {
+            SceneManager.LoadScene("Level1");
             Debug.Log("deudly ice my doge");
         }
     }
