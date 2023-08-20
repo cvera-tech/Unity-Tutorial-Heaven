@@ -1,10 +1,10 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class FinishLine : MonoBehaviour
 {
     // [SerializeField] GameObject startPositionObject;
+    [SerializeField] float reloadSceneDelay = 1f;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -15,7 +15,12 @@ public class FinishLine : MonoBehaviour
             // player.transform.SetPositionAndRotation(startPosition, startRotation);
             // player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             // player.GetComponent<Rigidbody2D>().angularVelocity = 0;
-            SceneManager.LoadScene("Level1");
+            Invoke("ReloadScene", reloadSceneDelay);
         }
+    }
+
+    void ReloadScene()
+    {
+        SceneManager.LoadScene("Level1");
     }
 }
