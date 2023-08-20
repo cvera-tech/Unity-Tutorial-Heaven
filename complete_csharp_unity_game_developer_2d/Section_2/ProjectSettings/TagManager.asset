@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Package
   - Customer
+  - Speedup
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -42,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Pickups
+    uniqueID: 4144884581
     locked: 0

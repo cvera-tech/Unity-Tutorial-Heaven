@@ -3,7 +3,7 @@ using UnityEngine;
 public class Delivery : MonoBehaviour
 {
 
-    [SerializeField] float packageDestroyDelay = 0f;
+    [SerializeField] float packageDestroyDelay = 0.1f;
     [SerializeField] Color32 noPackageColor = new(255, 255, 255, 255);
     [SerializeField] Color32 hasPackageColor = new(255, 90, 255, 255);
 
@@ -14,11 +14,6 @@ public class Delivery : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = noPackageColor;
-    }
-
-    void OnCollisionEnter2D()
-    {
-        Debug.Log("Oof.");
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -34,6 +29,7 @@ public class Delivery : MonoBehaviour
         {
             hasPackage = false;
             spriteRenderer.color = noPackageColor;
+            Destroy(other.gameObject, packageDestroyDelay);
             Debug.Log("Package delivered.");
         }
     }
