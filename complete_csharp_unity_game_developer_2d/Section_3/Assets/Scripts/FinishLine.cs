@@ -6,6 +6,13 @@ public class FinishLine : MonoBehaviour
     // [SerializeField] GameObject startPositionObject;
     [SerializeField] float reloadSceneDelay = 1f;
     [SerializeField] ParticleSystem finishLineParticleSystem;
+    [SerializeField] AudioClip finishLineAudioClip;
+
+    private AudioSource audioSource;
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -17,6 +24,8 @@ public class FinishLine : MonoBehaviour
             // player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             // player.GetComponent<Rigidbody2D>().angularVelocity = 0;
             finishLineParticleSystem.Play();
+            audioSource.PlayOneShot(finishLineAudioClip);
+
             Invoke(nameof(ReloadScene), reloadSceneDelay);
         }
     }
