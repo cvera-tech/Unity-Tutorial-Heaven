@@ -8,6 +8,7 @@ public class CrashDetection : MonoBehaviour
     [SerializeField] AudioClip crashAudioClip;
 
     private AudioSource audioSource;
+    private bool hasCrashed = false;
     private PlayerController playerController;
 
     void Start()
@@ -18,8 +19,9 @@ public class CrashDetection : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Ground"))
+        if (other.CompareTag("Ground") && !hasCrashed)
         {
+            hasCrashed = true;
             crashParticleSystem.Play();
             audioSource.PlayOneShot(crashAudioClip);
             playerController.DisableControls();
