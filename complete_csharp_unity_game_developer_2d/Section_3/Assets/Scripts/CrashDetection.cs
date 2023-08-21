@@ -8,10 +8,12 @@ public class CrashDetection : MonoBehaviour
     [SerializeField] AudioClip crashAudioClip;
 
     private AudioSource audioSource;
+    private PlayerController playerController;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -20,6 +22,7 @@ public class CrashDetection : MonoBehaviour
         {
             crashParticleSystem.Play();
             audioSource.PlayOneShot(crashAudioClip);
+            playerController.DisableControls();
             Invoke(nameof(ReloadScene), reloadSceneDelay);
         }
     }
