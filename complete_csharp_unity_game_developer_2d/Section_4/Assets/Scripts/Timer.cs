@@ -5,8 +5,11 @@ public class Timer : MonoBehaviour
     [SerializeField] float durationToAnswerQuestion = 15f;
     [SerializeField] float durationToShowCorrectAnswer = 10f;
 
+    // TODO: Move state management to quiz controller or a separate script.
     private bool _isAnsweringQuestion = false;
     private bool _showNextQuestion = false;
+    // private bool _timedout = false;
+    // private bool timerCancelled = false;
     private float timeRemaining;
 
     public bool IsAnsweringQuestion
@@ -23,12 +26,17 @@ public class Timer : MonoBehaviour
         set => _showNextQuestion = value;
     }
 
+    // public bool TimedOut {
+    //     get => _timedout;
+    //     set => _timedout = value;
+    // }
+
     void Update()
     {
         UpdateTimer();
         if (timeRemaining > 0)
         {
-            Debug.Log(FillFraction);
+            // Debug.Log(FillFraction);
         }
         else
         {
@@ -36,6 +44,11 @@ public class Timer : MonoBehaviour
             {
                 timeRemaining = durationToShowCorrectAnswer;
                 IsAnsweringQuestion = false;
+                // if (!timerCancelled)
+                // {
+                //     // TimedOut = true;
+                //     timerCancelled = false;
+                // }
             }
             else
             {
@@ -45,12 +58,13 @@ public class Timer : MonoBehaviour
             }
         }
 
-        Debug.Log(timeRemaining);
+        // Debug.Log(timeRemaining);
     }
 
     public void CancelTimer()
     {
         timeRemaining = 0;
+        // timerCancelled = true;
     }
 
     private float CalculateFillPercentage()
@@ -63,6 +77,5 @@ public class Timer : MonoBehaviour
     private void UpdateTimer()
     {
         timeRemaining -= Time.deltaTime;
-        
     }
 }

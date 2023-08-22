@@ -1115,8 +1115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c1970af6af4804dbdd612f3b7c5e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durationToAnswerQuestion: 3
-  durationToShowCorrectAnswer: 5
+  durationToAnswerQuestion: 5
+  durationToShowCorrectAnswer: 2
 --- !u!4 &1453907212
 Transform:
   m_ObjectHideFlags: 0
@@ -1790,6 +1790,8 @@ MonoBehaviour:
   wrongAnswerSprite: {fileID: 21300000, guid: d4a8a65293a54f94b9a72b33a95af541, type: 3}
   correctText: Correct!
   wrongText: Wrong!
+  timeoutText: You ran out of time!
+  timerImage: {fileID: 2010760130}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
