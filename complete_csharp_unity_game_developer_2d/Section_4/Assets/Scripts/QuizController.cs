@@ -8,6 +8,7 @@ public class QuizController : MonoBehaviour
     [SerializeField] TextMeshProUGUI questionText;
     [SerializeField] QuestionSO question;
     [SerializeField] GameObject[] answerButtons;
+    [SerializeField] Sprite defaultAnswerSprite;
     [SerializeField] Sprite correctAnswerSprite;
     [SerializeField] Sprite wrongAnswerSprite;
     [SerializeField] string correctText = "Correct!";
@@ -17,15 +18,7 @@ public class QuizController : MonoBehaviour
 
     void Start()
     {
-        questionText.text = question.Question;
-        correctAnswerIndex = question.CorrectAnswerIndex;
-
-        for (int i = 0; i < answerButtons.Length; i++) 
-        {
-            GameObject answerButton = answerButtons[i];
-            TextMeshProUGUI buttonTMP = answerButton.GetComponentInChildren<TextMeshProUGUI>();
-            buttonTMP.text = question.GetAnswer(i);
-        }
+        DisplayQuestion();
     }
 
     public void OnAnswerSelect(int index)
@@ -45,6 +38,44 @@ public class QuizController : MonoBehaviour
             GameObject correctButton = answerButtons[correctAnswerIndex];
             Image correctImage = correctButton.GetComponent<Image>();
             correctImage.sprite = correctAnswerSprite;
+        }
+        SetButtonsInteractable(false);
+    }
+
+    private void DisplayQuestion()
+    {
+        questionText.text = question.Question;
+        correctAnswerIndex = question.CorrectAnswerIndex;
+
+        for (int i = 0; i < answerButtons.Length; i++) 
+        {
+            GameObject answerButton = answerButtons[i];
+            TextMeshProUGUI buttonTMP = answerButton.GetComponentInChildren<TextMeshProUGUI>();
+            buttonTMP.text = question.GetAnswer(i);
+        }
+    }
+
+    private void GetNextQuestion()
+    {
+        SetButtonsInteractable(true);
+        SetDefaultButtonSprites();
+        DisplayQuestion();
+    }
+
+    private void SetButtonsInteractable(bool isInteractable)
+    {
+        foreach (GameObject button in answerButtons)
+        {
+            button.GetComponent<Button>().interactable = isInteractable;
+        }
+ 
+    }
+
+    private void SetDefaultButtonSprites()
+    {
+        foreach (GameObject button in answerButtons)
+        {
+            button.GetComponent<Button>().image.sprite = defaultAnswerSprite;
         }
     }
 }
