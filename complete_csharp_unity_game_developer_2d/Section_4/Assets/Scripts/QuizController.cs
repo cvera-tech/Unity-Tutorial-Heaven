@@ -1,12 +1,19 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class QuizController : MonoBehaviour
 {
     [Header("Questions")]
     [SerializeField] TextMeshProUGUI questionText;
-    [SerializeField] QuestionSO question;
+    // NOTE: The shorthand `new()` from C# 9+ does not play nicely with 
+    // serialized fields. In this case, the shorthand causes the created List
+    // object to implode (AKA become Disposed by the garbage collector) when you
+    // exit play mode.
+    // [SerializeField] List<QuestionSO> questions = new();
+    [SerializeField] List<QuestionSO> questions = new List<QuestionSO>();
+    private QuestionSO currentQuestion;
 
     [Header("Answers")]
     [SerializeField] GameObject[] answerButtons;
@@ -30,7 +37,6 @@ public class QuizController : MonoBehaviour
     void Start()
     {
         timer = FindObjectOfType<Timer>();
-        DisplayQuestion();
     }
 
     void Update()
@@ -60,23 +66,28 @@ public class QuizController : MonoBehaviour
 
     private void DisplayQuestion()
     {
-        questionText.text = question.Question;
-        correctAnswerIndex = question.CorrectAnswerIndex;
+        questionText.text = currentQuestion.Question;
+        correctAnswerIndex = currentQuestion.CorrectAnswerIndex;
 
         for (int i = 0; i < answerButtons.Length; i++) 
         {
             GameObject answerButton = answerButtons[i];
             TextMeshProUGUI buttonTMP = answerButton.GetComponentInChildren<TextMeshProUGUI>();
-            buttonTMP.text = question.GetAnswer(i);
+            buttonTMP.text = currentQuestion.GetAnswer(i);
         }
     }
 
     private void GetNextQuestion()
     {
-        hasAnsweredEarly = false;
-        SetButtonsInteractable(true);
-        SetDefaultButtonSprites();
-        DisplayQuestion();
+        if (questions.Count > 0)
+        {
+            currentQuestion = questions[0];
+            questions.RemoveAt(0);
+            hasAnsweredEarly = false;
+            SetButtonsInteractable(true);
+            SetDefaultButtonSprites();
+            DisplayQuestion();
+        }
     }
 
     private void SetButtonsInteractable(bool isInteractable)
