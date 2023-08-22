@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a81e00e0eb327e468e23bb48712d27d, type: 3}
   m_Name: Question 5
   m_EditorClassIdentifier: 
-  question: What font is used for most of the Strife actions?
+  _question: What font is used for most of the Strife actions?
+  _answers:
+  - Comic Sans
+  - Verdana
+  - Lucida Console
+  - Courier New
+  _correctAnswerIndex: 3
