@@ -180,8 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: What creature is depicted by the pogo ride in John's front yard during
-    Act 1?
+  m_text: Enter question text here.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82df0812098dc1341900e8d7cb04bdf6, type: 2}
   m_sharedMaterial: {fileID: -150147373336125720, guid: 82df0812098dc1341900e8d7cb04bdf6, type: 2}
@@ -1409,6 +1408,7 @@ GameObject:
   - component: {fileID: 2129757785}
   - component: {fileID: 2129757784}
   - component: {fileID: 2129757783}
+  - component: {fileID: 2129757787}
   m_Layer: 5
   m_Name: Quiz Canvas
   m_TagString: Untagged
@@ -1500,6 +1500,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2129757787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129757782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd2276f11daba0479b5c9caabce99c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questionText: {fileID: 346225709}
+  question: {fileID: 11400000, guid: dd96362a7c6adfe4a817ff1d9215a488, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
