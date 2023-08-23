@@ -5,71 +5,39 @@ public class Timer : MonoBehaviour
     [SerializeField] float durationToAnswerQuestion = 15f;
     [SerializeField] float durationToShowCorrectAnswer = 10f;
 
-    // TODO: Move state management to quiz controller or a separate script.
-    private bool _isAnsweringQuestion = false;
-    private bool _showNextQuestion = false;
-    // private bool _timedout = false;
-    // private bool timerCancelled = false;
     private float timeRemaining;
-
-    public bool IsAnsweringQuestion
-    {
-        get => _isAnsweringQuestion;
-        set { _isAnsweringQuestion = value; }
-    }
 
     public float FillFraction { get => CalculateFillPercentage(); }
 
-    public bool ShowNextQuestion
-    {
-        get => _showNextQuestion;
-        set => _showNextQuestion = value;
-    }
+    private QuizController quizController;
 
-    // public bool TimedOut {
-    //     get => _timedout;
-    //     set => _timedout = value;
-    // }
+    void Start()
+    {
+        // There should only be one quiz controller
+        quizController = FindObjectOfType<QuizController>();
+    }
 
     void Update()
     {
         UpdateTimer();
-        if (timeRemaining > 0)
-        {
-            // Debug.Log(FillFraction);
-        }
-        else
-        {
-            if (IsAnsweringQuestion)
-            {
-                timeRemaining = durationToShowCorrectAnswer;
-                IsAnsweringQuestion = false;
-                // if (!timerCancelled)
-                // {
-                //     // TimedOut = true;
-                //     timerCancelled = false;
-                // }
-            }
-            else
-            {
-                timeRemaining = durationToAnswerQuestion;
-                IsAnsweringQuestion = true;
-                ShowNextQuestion = true;
-            }
-        }
-
-        // Debug.Log(timeRemaining);
+        if (timeRemaining <= 0)
+            quizController.HandleTimeout();
     }
-
-    public void CancelTimer()
+    
+    public void ResetTimer()
     {
-        timeRemaining = 0;
-        // timerCancelled = true;
+        Debug.Log("[Timer.ResetTimer] CurrentGameState = " + quizController.CurrentGameState);
+        if (quizController.CurrentGameState == GameState.AskQuestion)
+            timeRemaining = durationToAnswerQuestion;
+        else
+            timeRemaining = durationToShowCorrectAnswer;
+        Debug.Log("[Timer.ResetTimer] timeRemaining = " + timeRemaining);
     }
 
     private float CalculateFillPercentage()
     {
-        if (IsAnsweringQuestion)
+        GameState currentGameState = quizController.CurrentGameState;
+        if (currentGameState == GameState.AskQuestion)
             return timeRemaining / durationToAnswerQuestion;
         return timeRemaining / durationToShowCorrectAnswer;
     }
