@@ -44,6 +44,9 @@ public class QuizController : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     private ScoreKeeper scoreKeeper;
 
+    [Header("ProgressBar")]
+    [SerializeField] Slider progressBar;
+
     private GameState _currentGameState;
     public GameState CurrentGameState
     {
@@ -53,10 +56,6 @@ public class QuizController : MonoBehaviour
         private set => _currentGameState = value;
     }
 
-    void OnEnable()
-    {
-    }
-
     void Start()
     {
         timer = FindObjectOfType<Timer>();
@@ -64,6 +63,7 @@ public class QuizController : MonoBehaviour
         
         // Start off with the first question.
         CurrentGameState = GameState.Start;
+        progressBar.value = 0;
         Debug.Log("[QuizController.Start] CurrentGameState == " + CurrentGameState);
     }
 
@@ -175,6 +175,7 @@ public class QuizController : MonoBehaviour
             GameObject correctButton = answerButtons[correctAnswerIndex];
             correctButton.GetComponent<Image>().sprite = correctButtonSprite;
             SetButtonsInteractable(false);
+            progressBar.value++;
             resetTimer = true;
         }
         // Question timed out
@@ -187,6 +188,7 @@ public class QuizController : MonoBehaviour
             scoreKeeper.IncorrectAnswer();
 
             SetButtonsInteractable(false);
+            progressBar.value++;
             resetTimer = true;
         }
         // Move on to the next question if possible
