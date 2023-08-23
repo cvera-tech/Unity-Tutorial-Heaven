@@ -17,12 +17,7 @@ public class QuizController : MonoBehaviour
 {
     [Header("Questions")]
     [SerializeField] TextMeshProUGUI questionText;
-    // NOTE: The shorthand `new()` from C# 9+ does not play nicely with 
-    // serialized fields. In this case, the shorthand causes the created List
-    // object to implode (AKA become Disposed by the garbage collector) when you
-    // exit play mode.
-    // [SerializeField] List<QuestionSO> questions = new();
-    [SerializeField] List<QuestionSO> questions = new List<QuestionSO>();
+    [SerializeField] List<QuestionSO> questions = new();
     private QuestionSO currentQuestion;
     private int currentQuestionIndex;
 
@@ -43,8 +38,10 @@ public class QuizController : MonoBehaviour
 
     [Header("Timer")]
     [SerializeField] Image timerImage;
-
     private Timer timer;
+
+    [Header("Score")]
+    [SerializeField] TextMeshProUGUI scoreText;
     private ScoreKeeper scoreKeeper;
 
     private GameState _currentGameState;
@@ -73,6 +70,7 @@ public class QuizController : MonoBehaviour
     void Update()
     {
         timerImage.fillAmount = timer.FillFraction;
+        scoreText.text = "Score: " + scoreKeeper.ScoreString;
 
         // Debug.Log("[QuizController.Update] CurrentGameState == " + CurrentGameState);
         switch (CurrentGameState)

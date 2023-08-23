@@ -3,25 +3,26 @@ using UnityEngine;
 
 public class ScoreKeeper : MonoBehaviour
 {
-
-    [SerializeField] TextMeshProUGUI scoreText;
-
     public int CorrectAnswers { get; private set; }
     public int QuestionsSeen { get; private set; }
+
+    public string ScoreString
+    {
+        get
+        {
+            int percent = Mathf.RoundToInt(CorrectAnswers / ((float)QuestionsSeen) * 100);
+            if (QuestionsSeen == 0)
+            {
+                return "--";
+            }
+            return CorrectAnswers + " / " + QuestionsSeen + " (" + percent + "%)";
+        }
+    }
 
     void Start()
     {
         CorrectAnswers = 0;
         QuestionsSeen = 0;
-    }
-
-    void Update()
-    {
-        if (QuestionsSeen > 0)
-        {
-            scoreText.text = "Score: " + CorrectAnswers + " / " + QuestionsSeen
-                + " (" + CalculatePercent() + "%)";
-        }
     }
 
     public void CorrectAnswer()
@@ -33,11 +34,6 @@ public class ScoreKeeper : MonoBehaviour
     public void IncorrectAnswer()
     {
         QuestionsSeen++;
-    }
-
-    private int CalculatePercent()
-    {
-        return (int)(CorrectAnswers / ((float)QuestionsSeen) * 100);
     }
 
 }

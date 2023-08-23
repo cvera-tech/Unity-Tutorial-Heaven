@@ -843,6 +843,7 @@ MonoBehaviour:
   wrongText: Wrong!
   timeoutText: You ran out of time!
   timerImage: {fileID: 2010760130}
+  scoreText: {fileID: 355530339}
 --- !u!4 &916139701
 Transform:
   m_ObjectHideFlags: 0
@@ -1887,7 +1888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c41897e8db92d84aaf7a5c9dfe510fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 355530339}
 --- !u!4 &2043660338
 Transform:
   m_ObjectHideFlags: 0
