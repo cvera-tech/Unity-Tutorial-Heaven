@@ -9,12 +9,17 @@ public enum GameState
     AskQuestion,
     AnswerSelected,
     TimedOut,
-    ShowAnswer,
     End
 }
 
 public class QuizController : MonoBehaviour
 {
+    [Header("Canvases")]
+    [SerializeField] Canvas quizCanvas;
+    [SerializeField] Canvas endCanvas;
+    private EndScreen endScreen;
+
+
     [Header("Questions")]
     [SerializeField] TextMeshProUGUI questionText;
     [SerializeField] List<QuestionSO> questions = new();
@@ -58,13 +63,9 @@ public class QuizController : MonoBehaviour
 
     void Start()
     {
-        timer = FindObjectOfType<Timer>();
-        scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        InitializeSystems();
         
-        // Start off with the first question.
         CurrentGameState = GameState.Start;
-        progressBar.value = 0;
-        Debug.Log("[QuizController.Start] CurrentGameState == " + CurrentGameState);
     }
 
     void Update()
@@ -76,12 +77,12 @@ public class QuizController : MonoBehaviour
         switch (CurrentGameState)
         {
             case GameState.Start:
+                Debug.Log("[QuizController.Update] CurrentGameState == " + CurrentGameState);
                 // At the start, we switch over immediately to AskQuestion
                 // to trigger the retrieval and display of the first question.
+                // If we were to add a start screen, modify this block!
+                StartGame();
                 HandleGameStateChange(GameState.AskQuestion);
-                break;
-            case GameState.End:
-                // TODO: Create a score screen!
                 break;
             default:
                 // Don't do anything in other states!
@@ -93,7 +94,8 @@ public class QuizController : MonoBehaviour
     public void HandleTimeout()
     {
         Debug.Log("[QuizController.HandleTimeout]");
-        GameState newGameState;
+
+        GameState? newGameState = null;
         switch (CurrentGameState)
         {
             case GameState.AskQuestion:
@@ -101,17 +103,14 @@ public class QuizController : MonoBehaviour
                 break;
             case GameState.AnswerSelected:
             case GameState.TimedOut:
-                newGameState = GameState.ShowAnswer;
-                break;
-            case GameState.ShowAnswer:
                 newGameState = GameState.AskQuestion;
                 break;
             default:
                 // TODO: We could throw an error here
-                newGameState = CurrentGameState;
+                Debug.LogError("[QuizController.HandleTimeout] Invalid Game State");
                 break;
         }
-        HandleGameStateChange(newGameState, true);
+        HandleGameStateChange(newGameState ?? CurrentGameState, true);
     }
 
     /*
@@ -119,12 +118,22 @@ public class QuizController : MonoBehaviour
      */
     public void OnAnswerSelect(int index)
     {
-        Debug.Log("[QuizController.OnAnswerSelect] index = " + index);
+        // Debug.Log("[QuizController.OnAnswerSelect] index = " + index);
         selectedAnswerIndex = index;
         HandleGameStateChange(GameState.AnswerSelected, false);
     }
 
-    private void DisplayNextQuestion()
+    public void OnRestartGameSelect()
+    {
+        Debug.Log("[QuizController.OnRestartGameSelect]");
+        CurrentGameState = GameState.Start;
+    }
+
+    /**
+     * Retrieves and renders the next question. Returns true if there are
+     * questions remaining. False otherwise.
+     */
+    private bool DisplayNextQuestion()
     {
         if (currentQuestionIndex < questions.Count)
         {
@@ -142,11 +151,23 @@ public class QuizController : MonoBehaviour
             }
 
             currentQuestionIndex++;
+            return true;
         }
         else
         {
             HandleGameStateChange(GameState.End);
+            return false;
         }
+    }
+
+    private void InitializeSystems()
+    {
+        
+        timer = FindObjectOfType<Timer>();
+        timer.Initialize(this);
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        endScreen = FindObjectOfType<EndScreen>();
+        endScreen.Initialize(scoreKeeper);
     }
 
     /**
@@ -160,13 +181,11 @@ public class QuizController : MonoBehaviour
         {
             if (selectedAnswerIndex == correctAnswerIndex)
             {
-                Debug.Log("Correct Answer");
                 questionText.text = correctText;
                 scoreKeeper.CorrectAnswer();
             }
             else
             {
-                Debug.Log("Incorrect Answer");
                 questionText.text = wrongText;
                 GameObject selectedButton = answerButtons[selectedAnswerIndex];
                 selectedButton.GetComponent<Image>().sprite = wrongButtonSprite;
@@ -194,22 +213,26 @@ public class QuizController : MonoBehaviour
         // Move on to the next question if possible
         else if (newGameState == GameState.AskQuestion)
         {
-            DisplayNextQuestion();
-            resetTimer = true;
+            resetTimer = DisplayNextQuestion();
         }
         else if (newGameState == GameState.End)
         {
-            // TODO: Show new screen with score.
+            timer.StopTimer();
+            ShowEndScreen();
         }
 
         CurrentGameState = newGameState;
         if (resetTimer)
+        {
+            Debug.Log("[QuizController.HandleGameStateChange] Reset timer");
             timer.ResetTimer();
+            timer.StartTimer();
+        }
     }
 
     private void SetButtonsInteractable(bool isInteractable)
     {
-        Debug.Log("[QuizController.SetButtonsInteractable] isInteractable = " + isInteractable);
+        // Debug.Log("[QuizController.SetButtonsInteractable] isInteractable = " + isInteractable);
         foreach (GameObject button in answerButtons)
         {
             button.GetComponent<Button>().interactable = isInteractable;
@@ -223,5 +246,24 @@ public class QuizController : MonoBehaviour
         {
             button.GetComponent<Button>().image.sprite = defaultButtonSprite;
         }
+    }
+
+    private void ShowEndScreen()
+    {
+        endCanvas.gameObject.SetActive(true);
+        quizCanvas.gameObject.SetActive(false);
+        endScreen.ShowFinalScore();
+    }
+
+    /**
+     *  Initialize all the necessary variables and activate the correct canvas.
+     */
+    private void StartGame()
+    {
+        currentQuestionIndex = 0;
+        progressBar.value = 0;
+        scoreKeeper.Reset();
+        quizCanvas.gameObject.SetActive(true);
+        endCanvas.gameObject.SetActive(false);
     }
 }

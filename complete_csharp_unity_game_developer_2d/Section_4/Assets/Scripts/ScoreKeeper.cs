@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class ScoreKeeper : MonoBehaviour
@@ -19,12 +18,6 @@ public class ScoreKeeper : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        CorrectAnswers = 0;
-        QuestionsSeen = 0;
-    }
-
     public void CorrectAnswer()
     {
         CorrectAnswers++;
@@ -34,6 +27,12 @@ public class ScoreKeeper : MonoBehaviour
     public void IncorrectAnswer()
     {
         QuestionsSeen++;
+    }
+
+    public void Reset()
+    {
+        CorrectAnswers = 0;
+        QuestionsSeen = 0;
     }
 
 }

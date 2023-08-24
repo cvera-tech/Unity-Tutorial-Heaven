@@ -11,27 +11,45 @@ public class Timer : MonoBehaviour
 
     private QuizController quizController;
 
-    void Start()
+    private bool running = false;
+
+
+    private void Update()
     {
-        // There should only be one quiz controller
-        quizController = FindObjectOfType<QuizController>();
+        // Debug.Log("[Timer.Update] Running = " + running);
+        if (running)
+        {
+            UpdateTimer();
+            if (timeRemaining <= 0)
+            {
+                // Stop the timer to prevent multiple calls to HandleTimeout.
+                StopTimer();
+                quizController.HandleTimeout();
+            }
+        }
     }
 
-    void Update()
+    public void Initialize(QuizController quizController)
     {
-        UpdateTimer();
-        if (timeRemaining <= 0)
-            quizController.HandleTimeout();
+        this.quizController = quizController;
     }
     
     public void ResetTimer()
     {
-        Debug.Log("[Timer.ResetTimer] CurrentGameState = " + quizController.CurrentGameState);
         if (quizController.CurrentGameState == GameState.AskQuestion)
             timeRemaining = durationToAnswerQuestion;
         else
             timeRemaining = durationToShowCorrectAnswer;
-        Debug.Log("[Timer.ResetTimer] timeRemaining = " + timeRemaining);
+    }
+
+    public void StartTimer()
+    {
+        running = true;
+    }
+
+    public void StopTimer()
+    {
+        running = false;
     }
 
     private float CalculateFillPercentage()
