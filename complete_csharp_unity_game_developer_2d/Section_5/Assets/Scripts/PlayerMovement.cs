@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Rigidbody2D rb2d;
     private Animator animator;
+    private CapsuleCollider2D cc2d;
 
     [SerializeField] private float runSpeed = 1f;
     [SerializeField] private bool facingRight = true;
@@ -14,11 +15,13 @@ public class PlayerMovement : MonoBehaviour
     // TODO: Extract these magic strings to their own class
     // Perhaps a scriptable object?
     private readonly string isRunning = "isRunning";
+    private readonly string groundLayer = "Ground";
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        cc2d = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
@@ -44,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     
     private void OnJump(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && cc2d.IsTouchingLayers(LayerMask.GetMask(groundLayer)))
         {
             rb2d.velocity += new Vector2(0f, jumpSpeed);
         }
