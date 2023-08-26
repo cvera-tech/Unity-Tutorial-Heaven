@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     
     // TODO: Extract these magic strings to their own class
     // Perhaps a scriptable object?
+    private readonly string isClimbing = "isClimbing";
     private readonly string isRunning = "isRunning";
     private readonly string ladderLayer = "Ladder";
     private readonly string groundLayer = "Ground";
@@ -66,19 +67,21 @@ public class PlayerMovement : MonoBehaviour
         if (IsTouchingLayer(ladderLayer))
         {
             rb2d.gravityScale = 0;
-            if (Mathf.Abs(moveInput.y) > Mathf.Epsilon)
-            {
+            if (HasVerticalMoveInput())
                 rb2d.velocity = new Vector2(rb2d.velocity.x, moveInput.y * climbSpeed);
-            }
             else
-            {
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
-            }
+            
+            animator.SetBool(isClimbing, HasVerticalMoveInput());
         }
         else
+        {
             rb2d.gravityScale = defaultGravityScale;
+            // This fixes the bug where leaving the ladder while holding down a
+            // climb input causes the animator to be stuck in the climbing state
+            animator.SetBool(isClimbing, false);
+        }
 
-        
     }
 
     private void FlipSprite()
@@ -87,6 +90,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool HasHorizontalMoveInput() => Mathf.Abs(moveInput.x) > Mathf.Epsilon;
+
+    private bool HasVerticalMoveInput() => Mathf.Abs(moveInput.y) > Mathf.Epsilon;
 
     private bool IsTouchingLayer(string layerMaskString) => cc2d.IsTouchingLayers(LayerMask.GetMask(layerMaskString));
 
