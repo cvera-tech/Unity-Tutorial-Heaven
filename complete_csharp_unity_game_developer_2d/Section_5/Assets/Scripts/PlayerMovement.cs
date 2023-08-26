@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float runSpeed = 1f;
     [SerializeField] private bool facingRight = true;
+    [SerializeField] private float jumpSpeed = 5f;
     
     // TODO: Extract these magic strings to their own class
     // Perhaps a scriptable object?
@@ -38,7 +39,16 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.localScale = new Vector2(facingRight ? 1f : -1f, 1f);
     }
+
+    private bool HasHorizontalMoveInput() => Mathf.Abs(moveInput.x) > Mathf.Epsilon;
     
+    private void OnJump(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            rb2d.velocity += new Vector2(0f, jumpSpeed);
+        }
+    }
     private void Run()
     {
         Vector2 runVelocity = new(moveInput.x * runSpeed, rb2d.velocity.y);
@@ -47,5 +57,4 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool(isRunning, HasHorizontalMoveInput());
     }
 
-    private bool HasHorizontalMoveInput() => Mathf.Abs(moveInput.x) > Mathf.Epsilon;
 }
