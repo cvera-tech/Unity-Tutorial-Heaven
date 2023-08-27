@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private readonly string ladderLayer = "Ladder";
     private readonly string groundLayer = "Ground";
     private readonly string enemyLayer = "Enemy";
-    private readonly string enemyTag = "Enemy";
+    private readonly string hazardLayer = "Hazard";
 
     void Start()
     {
@@ -72,9 +72,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(enemyTag))
+        if (IsTouchingLayer(cc2d, enemyLayer))
         {
             Vector3 collisionDirection = (collision.gameObject.GetComponent<Rigidbody2D>().transform.position - rb2d.transform.position).normalized;
+            Die(collisionDirection);
+        }
+        else if (IsTouchingLayer(cc2d, hazardLayer))
+        {
+            // We need to do it this way because the hazards tilemap's transform is at (0, 0, 0)
+            Vector2 collisionDirection = (collision.contacts[0].point - new Vector2(rb2d.transform.position.x, rb2d.transform.position.y)).normalized;
             Die(collisionDirection);
         }
     }
@@ -125,7 +131,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Die(Vector2 knockbackDirection)
     {
-        Debug.Log(knockbackDirection);
         isAlive = false;
         rb2d.SetRotation(90f);
         rb2d.velocity = -knockbackDirection * knockbackHorizontalMultiplier + new Vector2(0f, knockbackVerticalSpeed);
@@ -135,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
         rb2d.sharedMaterial = null;
 
         // Removes collision with enemies
-        rb2d.excludeLayers = LayerMask.GetMask(enemyLayer);
+        rb2d.excludeLayers = LayerMask.GetMask(new string[] { enemyLayer, hazardLayer });
     }
 
 }
