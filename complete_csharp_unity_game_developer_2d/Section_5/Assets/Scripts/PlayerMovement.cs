@@ -16,6 +16,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Min(0)] private float knockbackHorizontalMultiplier = 5f;
     [SerializeField, Min(0)] private float knockbackVerticalSpeed = 5f;
 
+    [Header("Weapon")]
+    [SerializeField] Transform bow;
+    [SerializeField] GameObject arrow;
+    
+
     private float defaultGravityScale;
     private bool isAlive;
 
@@ -45,8 +50,20 @@ public class PlayerMovement : MonoBehaviour
         if (!isAlive)
             return;
         Run();
-        FlipSprite();
+        FlipSprite(transform);
         ClimbLadder();
+    }
+
+    private void OnFire(InputValue value)
+    {
+        if (!isAlive)
+            return;
+
+        if (value.isPressed)
+        {
+            GameObject newArrow = Instantiate(arrow, bow.position, bow.rotation);
+            FlipSprite(newArrow.transform);
+        }
     }
 
     private void OnJump(InputValue value)
@@ -110,9 +127,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void FlipSprite()
+    private void FlipSprite(Transform transformToFlip)
     {
-        transform.localScale = new Vector2(facingRight ? 1f : -1f, 1f);
+        transformToFlip.localScale = new Vector2(facingRight ? 1f : -1f, 1f);
     }
 
     private bool HasHorizontalMoveInput() => Mathf.Abs(moveInput.x) > Mathf.Epsilon;
@@ -132,7 +149,11 @@ public class PlayerMovement : MonoBehaviour
     private void Die(Vector2 knockbackDirection)
     {
         isAlive = false;
-        rb2d.SetRotation(90f);
+        // This ensures the sprite is facing upwards
+        if (facingRight)
+            rb2d.SetRotation(90f);
+        else
+            rb2d.SetRotation(-90f);
         rb2d.velocity = -knockbackDirection * knockbackHorizontalMultiplier + new Vector2(0f, knockbackVerticalSpeed);
         animator.SetTrigger(isDead);
         
