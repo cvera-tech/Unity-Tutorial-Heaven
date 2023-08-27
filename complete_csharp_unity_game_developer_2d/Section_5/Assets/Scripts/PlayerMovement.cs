@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float climbSpeed = 5f;
 
     private float defaultGravityScale;
+    private bool isAlive;
 
     // TODO: Extract these magic strings to their own class
     // Perhaps a scriptable object?
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private readonly string isRunning = "isRunning";
     private readonly string ladderLayer = "Ladder";
     private readonly string groundLayer = "Ground";
+    private readonly string enemyTag = "Enemy";
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         feetCollider = GetComponent<CircleCollider2D>();
 
         defaultGravityScale = rb2d.gravityScale;
+        isAlive = true;
     }
 
     void Update()
@@ -44,6 +47,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump(InputValue value)
     {
+        if (!isAlive)
+            return;
+
         if (value.isPressed && IsTouchingLayer(cc2d, groundLayer) && IsTouchingLayer(feetCollider, groundLayer))
         {
             rb2d.velocity += new Vector2(0f, jumpSpeed);
@@ -52,9 +58,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnMove(InputValue value)
     {
+        if (!isAlive)
+            return;
+
         moveInput = value.Get<Vector2>();
         if (HasHorizontalMoveInput())
             facingRight = moveInput.x > Mathf.Epsilon;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(enemyTag))
+            isAlive = false;
     }
 
     /*
@@ -80,7 +95,6 @@ public class PlayerMovement : MonoBehaviour
             // climb input causes the animator to be stuck in the climbing state
             animator.SetBool(isClimbing, false);
         }
-
     }
 
     private void FlipSprite()
