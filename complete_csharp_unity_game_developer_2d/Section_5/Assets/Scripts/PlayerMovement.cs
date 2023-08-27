@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator animator;
     private CapsuleCollider2D cc2d;
+    private CircleCollider2D feetCollider;
 
     [SerializeField] private float runSpeed = 1f;
     [SerializeField] private bool facingRight = true;
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         cc2d = GetComponent<CapsuleCollider2D>();
+        feetCollider = GetComponent<CircleCollider2D>();
 
         defaultGravityScale = rb2d.gravityScale;
     }
@@ -45,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump(InputValue value)
     {
-        if (value.isPressed && IsTouchingLayer(groundLayer))
+        if (value.isPressed && IsTouchingLayer(cc2d, groundLayer) && IsTouchingLayer(feetCollider, groundLayer))
         {
             rb2d.velocity += new Vector2(0f, jumpSpeed);
         }
@@ -58,13 +60,18 @@ public class PlayerMovement : MonoBehaviour
             facingRight = moveInput.x > Mathf.Epsilon;
     }
 
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.layer)
+    // }
+
     /*
         Custom methods
     */
 
     private void ClimbLadder()
     {
-        if (IsTouchingLayer(ladderLayer))
+        if (IsTouchingLayer(cc2d, ladderLayer))
         {
             rb2d.gravityScale = 0;
             if (HasVerticalMoveInput())
@@ -93,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool HasVerticalMoveInput() => Mathf.Abs(moveInput.y) > Mathf.Epsilon;
 
-    private bool IsTouchingLayer(string layerMaskString) => cc2d.IsTouchingLayers(LayerMask.GetMask(layerMaskString));
+    private bool IsTouchingLayer(Collider2D collider, string layerMaskString) => collider.IsTouchingLayers(LayerMask.GetMask(layerMaskString));
 
     private void Run()
     {
