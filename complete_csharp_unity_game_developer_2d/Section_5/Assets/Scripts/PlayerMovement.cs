@@ -18,9 +18,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float defaultGravityScale;
 
-
-    // private bool isTouchingLadder = false;
-    
     // TODO: Extract these magic strings to their own class
     // Perhaps a scriptable object?
     private readonly string isClimbing = "isClimbing";
@@ -59,11 +56,6 @@ public class PlayerMovement : MonoBehaviour
         if (HasHorizontalMoveInput())
             facingRight = moveInput.x > Mathf.Epsilon;
     }
-
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.gameObject.layer)
-    // }
 
     /*
         Custom methods
