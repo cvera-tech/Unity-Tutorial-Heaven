@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 292318136601746453}
   - component: {fileID: 1983861506528208653}
   - component: {fileID: 936631753372556704}
-  - component: {fileID: 6552814612044072311}
   - component: {fileID: 3297593908989186677}
+  - component: {fileID: 6552814612044072311}
+  - component: {fileID: 1212109063117222605}
   - component: {fileID: -3820310427211192632}
   - component: {fileID: 96369662944235038}
-  - component: {fileID: 1212109063117222605}
   m_Layer: 8
   m_Name: Jory (Player)
   m_TagString: Untagged
@@ -111,6 +111,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &3297593908989186677
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3952212477803946968}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 2
+  m_Material: {fileID: 6200000, guid: a70199c41c067aa4c97bee3bb62a8ea9, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!70 &6552814612044072311
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -146,33 +173,41 @@ CapsuleCollider2D:
   m_Offset: {x: -0.031220526, y: -0.093707204}
   m_Size: {x: 0.43792462, y: 0.8125856}
   m_Direction: 0
---- !u!50 &3297593908989186677
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!58 &1212109063117222605
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3952212477803946968}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 2
-  m_Material: {fileID: 6200000, guid: a70199c41c067aa4c97bee3bb62a8ea9, type: 2}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.03122053, y: -0.44}
+  serializedVersion: 2
+  m_Radius: 0.070175886
 --- !u!114 &-3820310427211192632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,38 +254,5 @@ MonoBehaviour:
   facingRight: 1
   jumpSpeed: 10
   climbSpeed: 5
---- !u!58 &1212109063117222605
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3952212477803946968}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.03122053, y: -0.44}
-  serializedVersion: 2
-  m_Radius: 0.070175886
+  knockbackHorizontalMultiplier: 5
+  knockbackVerticalSpeed: 5

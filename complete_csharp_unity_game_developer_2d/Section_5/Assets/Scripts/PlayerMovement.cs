@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool facingRight = true;
     [SerializeField] private float jumpSpeed = 5f;
     [SerializeField] private float climbSpeed = 5f;
+    [SerializeField, Min(0)] private float knockbackHorizontalMultiplier = 5f;
+    [SerializeField, Min(0)] private float knockbackVerticalSpeed = 5f;
 
     private float defaultGravityScale;
     private bool isAlive;
@@ -23,8 +23,10 @@ public class PlayerMovement : MonoBehaviour
     // Perhaps a scriptable object?
     private readonly string isClimbing = "isClimbing";
     private readonly string isRunning = "isRunning";
+    private readonly string isDead = "isDead";
     private readonly string ladderLayer = "Ladder";
     private readonly string groundLayer = "Ground";
+    private readonly string enemyLayer = "Enemy";
     private readonly string enemyTag = "Enemy";
 
     void Start()
@@ -40,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!isAlive)
+            return;
         Run();
         FlipSprite();
         ClimbLadder();
@@ -69,7 +73,10 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(enemyTag))
-            isAlive = false;
+        {
+            Vector3 collisionDirection = (collision.gameObject.GetComponent<Rigidbody2D>().transform.position - rb2d.transform.position).normalized;
+            Die(collisionDirection);
+        }
     }
 
     /*
@@ -116,6 +123,19 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool(isRunning, HasHorizontalMoveInput());
     }
 
-    
+    private void Die(Vector2 knockbackDirection)
+    {
+        Debug.Log(knockbackDirection);
+        isAlive = false;
+        rb2d.SetRotation(90f);
+        rb2d.velocity = -knockbackDirection * knockbackHorizontalMultiplier + new Vector2(0f, knockbackVerticalSpeed);
+        animator.SetTrigger(isDead);
+        
+        // Resets friction to default (0.4)
+        rb2d.sharedMaterial = null;
+
+        // Removes collision with enemies
+        rb2d.excludeLayers = LayerMask.GetMask(enemyLayer);
+    }
 
 }
