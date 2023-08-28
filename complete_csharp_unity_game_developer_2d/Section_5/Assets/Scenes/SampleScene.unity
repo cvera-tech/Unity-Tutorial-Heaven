@@ -36347,6 +36347,10 @@ PrefabInstance:
       propertyPath: bow
       value: 
       objectReference: {fileID: 1458724908}
+    - target: {fileID: 96369662944235038, guid: 0160e6ed33387b84eb0f802c04b401ac, type: 3}
+      propertyPath: arrowSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 292318136601746453, guid: 0160e6ed33387b84eb0f802c04b401ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -36390,10 +36394,6 @@ PrefabInstance:
     - target: {fileID: 3952212477803946968, guid: 0160e6ed33387b84eb0f802c04b401ac, type: 3}
       propertyPath: m_Name
       value: Jory (Player)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8932449565233812193, guid: 0160e6ed33387b84eb0f802c04b401ac, type: 3}
-      propertyPath: m_Name
-      value: Bow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

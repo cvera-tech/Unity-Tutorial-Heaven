@@ -17,8 +17,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Min(0)] private float knockbackVerticalSpeed = 5f;
 
     [Header("Weapon")]
-    [SerializeField] Transform bow;
-    [SerializeField] GameObject arrow;
+    [SerializeField] private Transform bow;
+    [SerializeField] private GameObject arrow;
+    [SerializeField] private float arrowSpeed = 10f;
+    // [SerializeField] private float arrowDamage;
     
 
     private float defaultGravityScale;
@@ -61,8 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (value.isPressed)
         {
-            GameObject newArrow = Instantiate(arrow, bow.position, bow.rotation);
-            FlipSprite(newArrow.transform);
+            animator.Play("Fire");
         }
     }
 
@@ -164,4 +165,10 @@ public class PlayerMovement : MonoBehaviour
         rb2d.excludeLayers = LayerMask.GetMask(new string[] { enemyLayer, hazardLayer });
     }
 
+    public void ShootArrow()
+    {
+        GameObject newArrow = Instantiate(arrow, bow.position, bow.rotation);
+        FlipSprite(newArrow.transform);
+        newArrow.GetComponent<ArrowBehavior>().MoveRight(facingRight);
+    }
 }
