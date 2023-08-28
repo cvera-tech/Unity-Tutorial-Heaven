@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2252454505271561317}
   - component: {fileID: 1550516262297888723}
   - component: {fileID: 6192280605531294491}
+  - component: {fileID: 8543705373166805043}
   m_Layer: 11
   m_Name: Blob (Enemy)
   m_TagString: Enemy
@@ -232,3 +233,19 @@ MonoBehaviour:
   moveSpeed: 1
   facingRight: 1
   turningPauseDuration: 2
+--- !u!114 &8543705373166805043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7919280039343655207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed30e450895b9f4baa1b0f6a2663c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitpoints: 2
+  damagingLayers:
+  - Arrow
+  - Player

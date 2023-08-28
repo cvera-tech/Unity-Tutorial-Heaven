@@ -15,7 +15,8 @@ public class ArrowBehavior : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        transform.SetParent(collision.gameObject.transform);
+        GameObject otherGameObject = collision.gameObject;
+        transform.SetParent(otherGameObject.transform);
 
         // Stop the physics simulation to prevent sticking to walls after hitting an enemy
         arrowRigidbody.simulated = false;
@@ -30,7 +31,6 @@ public class ArrowBehavior : MonoBehaviour
     public void MoveRight(bool moveRight)
     {
         Vector2 arrowVector = new((moveRight ? 1f : -1f) * speed, 0f);
-        Debug.Log(arrowVector);
         arrowRigidbody.velocity = arrowVector;
     }
 }

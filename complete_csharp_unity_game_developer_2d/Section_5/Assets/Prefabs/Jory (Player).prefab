@@ -257,7 +257,9 @@ MonoBehaviour:
   climbSpeed: 5
   knockbackHorizontalMultiplier: 5
   knockbackVerticalSpeed: 5
+  bow: {fileID: 0}
   arrow: {fileID: 1745276539979826098, guid: 5be9e29dfe7a047459dfae3e9da7badc, type: 3}
+  arrowSpeed: 10
 --- !u!1 &8932449565233812193
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +285,7 @@ Transform:
   m_GameObject: {fileID: 8932449565233812193}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: -0.22, z: 0}
+  m_LocalPosition: {x: -0.1, y: -0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

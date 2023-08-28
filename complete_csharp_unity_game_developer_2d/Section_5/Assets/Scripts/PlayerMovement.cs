@@ -19,8 +19,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Weapon")]
     [SerializeField] private Transform bow;
     [SerializeField] private GameObject arrow;
-    [SerializeField] private float arrowSpeed = 10f;
-    // [SerializeField] private float arrowDamage;
     
 
     private float defaultGravityScale;
@@ -88,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
             facingRight = moveInput.x > Mathf.Epsilon;
     }
 
+    // TODO: Remove and replace with new Damage system
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (IsTouchingLayer(cc2d, enemyLayer))
