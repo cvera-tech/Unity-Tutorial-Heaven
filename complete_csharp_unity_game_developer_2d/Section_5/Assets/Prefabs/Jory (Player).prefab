@@ -258,6 +258,7 @@ MonoBehaviour:
   climbSpeed: 5
   knockbackHorizontalMultiplier: 5
   knockbackVerticalSpeed: 5
+  playerHealthManager: {fileID: 11400000, guid: 048bd591f06075142907759b4f05018b, type: 2}
   bow: {fileID: 4739829895833355700}
   arrow: {fileID: 1745276539979826098, guid: 5be9e29dfe7a047459dfae3e9da7badc, type: 3}
 --- !u!114 &2952657261122490815

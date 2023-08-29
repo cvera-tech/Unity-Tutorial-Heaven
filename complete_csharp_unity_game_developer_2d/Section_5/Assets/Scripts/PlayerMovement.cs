@@ -16,10 +16,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Min(0)] private float knockbackHorizontalMultiplier = 5f;
     [SerializeField, Min(0)] private float knockbackVerticalSpeed = 5f;
 
+
+    [Header("Health")]
+    [SerializeField] private PlayerHealthManager playerHealthManager;
+
+
     [Header("Weapon")]
     [SerializeField] private Transform bow;
     [SerializeField] private GameObject arrow;
-    
+
 
     private float defaultGravityScale;
     private bool isAlive;
@@ -33,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     private readonly string groundLayer = "Ground";
     private readonly string enemyLayer = "Enemy";
     private readonly string hazardLayer = "Hazard";
+
 
     void Start()
     {
@@ -162,6 +168,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Removes collision with enemies
         rb2d.excludeLayers = LayerMask.GetMask(new string[] { enemyLayer, hazardLayer });
+
+        playerHealthManager.ChangeHealth(-1);
     }
 
     public void ShootArrow()

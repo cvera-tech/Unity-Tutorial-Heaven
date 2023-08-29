@@ -4,6 +4,7 @@ public class Damager : MonoBehaviour
 {
     [SerializeField] private int damage = 1;
 
+
     [Tooltip("These are the layers that this GameObject can deal damage to.")]
     [SerializeField] private LayerMask layersToDamage;
 
@@ -15,7 +16,7 @@ public class Damager : MonoBehaviour
         if ((1 << otherGameObject.layer & layersToDamage) == 0)
             return;
         
-        if (otherGameObject.TryGetComponent<Damageable>(out var otherDamageable))
+        if (otherGameObject.TryGetComponent(out AbstractDamageable otherDamageable))
             otherDamageable.ReceiveDamage(damage);
     }
 }
