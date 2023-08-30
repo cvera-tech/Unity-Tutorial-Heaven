@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayerHealthChange(int health)
     {
-        Debug.Log("Player died! Health = " + health);
         if (health <= 0)
         {
             // Raise an event to reset the player health.
