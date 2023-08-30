@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
 /// This class manages the health of the player character.
@@ -8,32 +6,56 @@ using UnityEngine.Events;
 /// Adapted from samyam's tutorial:
 /// https://www.youtube.com/watch?v=qUYpQ8ySkLU
 /// </summary>
-[CreateAssetMenu(menuName = "Health Manager")]
-public class PlayerHealthManager : ScriptableObject
+public class PlayerHealthManager : HealthManager
 {
-    [SerializeField] private int maxHealth = 3;
-    [SerializeField] private int health;
+    [Tooltip("The channel where this component will raise health change events.")]
+    [SerializeField] private IntEventChannelSO _healthChangedChannel;
+    [SerializeField] private VoidEventChannelSO _resetHealthChannel;
+    [SerializeField] private SessionDataSO _sessionData;
 
-    public UnityEvent<int> healthChangeEvent;
+    private bool UseSessionData => _sessionData != null;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        health = maxHealth;
-        healthChangeEvent ??= new();
+        if (!UseSessionData)
+            base.OnEnable();
+
+        if (_resetHealthChannel != null)
+            _resetHealthChannel.OnEventRaised += ResetHealth;
+    }
+
+    private void OnDisable()
+    {
+        if (_resetHealthChannel != null)
+            _resetHealthChannel.OnEventRaised -= ResetHealth;
     }
 
     /// <summary>
     /// Changes the current health by adding the input amount.
     /// </summary>
     /// <param name="amount">How much health to add (a negative value subtracts health).</param>
-    public void ChangeHealth(int amount)
+    public override void ChangeHealth(int amount)
     {
-        health += amount;
-        healthChangeEvent.Invoke(health);
+        if (UseSessionData)
+        {
+            _sessionData.PlayerHealth += amount;
+            _healthChangedChannel.RaiseEvent(_sessionData.PlayerHealth);
+            if (_sessionData.PlayerHealth <= 0)
+                OnZeroHealth();
+        }
+        else
+        {
+            base.ChangeHealth(amount);
+            _healthChangedChannel.RaiseEvent(currentHealth);
+        }
+
     }
 
-    /// <summary>
-    /// Sets health to maxHealth. This method does NOT invoke a health change event.
-    /// </summary>
-    public void ResetHealth() => health = maxHealth;
+    public override void OnZeroHealth()
+    {
+        if (UseSessionData)
+            _sessionData.PlayerHealth = maxHealth;
+        else
+            base.OnZeroHealth();
+    }
 }

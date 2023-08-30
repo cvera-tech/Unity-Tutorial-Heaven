@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private CapsuleCollider2D cc2d;
     private CircleCollider2D feetCollider;
+    private PlayerHealthManager _playerHealthManager;
 
     [SerializeField] private float runSpeed = 1f;
     [SerializeField] private bool facingRight = true;
@@ -16,11 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Min(0)] private float knockbackHorizontalMultiplier = 5f;
     [SerializeField, Min(0)] private float knockbackVerticalSpeed = 5f;
 
-
-    [Header("Health")]
-    [SerializeField] private PlayerHealthManager playerHealthManager;
-
-
+    // TODO: Should these be in a different component attached to the bow game object?
     [Header("Weapon")]
     [SerializeField] private Transform bow;
     [SerializeField] private GameObject arrow;
@@ -46,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         cc2d = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<CircleCollider2D>();
+        _playerHealthManager = GetComponent<PlayerHealthManager>();
 
         defaultGravityScale = rb2d.gravityScale;
         isAlive = true;
@@ -146,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Run()
     {
+        // This implementation prevents physics collisions from altering the rigidbody's velocity as long as the controls are enabled.
         Vector2 runVelocity = new(moveInput.x * runSpeed, rb2d.velocity.y);
         rb2d.velocity = runVelocity;
         
@@ -169,9 +168,10 @@ public class PlayerMovement : MonoBehaviour
         // Removes collision with enemies
         rb2d.excludeLayers = LayerMask.GetMask(new string[] { enemyLayer, hazardLayer });
 
-        playerHealthManager.ChangeHealth(-1);
+        _playerHealthManager.ChangeHealth(-1);
     }
 
+    // TODO: Should this be in a different class? See the "Weapon" class members above.
     public void ShootArrow()
     {
         GameObject newArrow = Instantiate(arrow, bow.position, bow.rotation);

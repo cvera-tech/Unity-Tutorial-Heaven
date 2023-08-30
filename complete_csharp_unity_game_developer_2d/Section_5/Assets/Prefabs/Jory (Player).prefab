@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -3820310427211192632}
   - component: {fileID: 96369662944235038}
   - component: {fileID: 2952657261122490815}
+  - component: {fileID: 3074472297255284163}
   m_Layer: 8
   m_Name: Jory (Player)
   m_TagString: Untagged
@@ -258,7 +259,6 @@ MonoBehaviour:
   climbSpeed: 5
   knockbackHorizontalMultiplier: 5
   knockbackVerticalSpeed: 5
-  playerHealthManager: {fileID: 11400000, guid: 048bd591f06075142907759b4f05018b, type: 2}
   bow: {fileID: 4739829895833355700}
   arrow: {fileID: 1745276539979826098, guid: 5be9e29dfe7a047459dfae3e9da7badc, type: 3}
 --- !u!114 &2952657261122490815
@@ -273,6 +273,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ec615cf7efea043aced202d8e0a3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3074472297255284163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3952212477803946968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7cb5f4e6222d54db15e25eb7c30d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 3
+  _healthChangedChannel: {fileID: 11400000, guid: 8e871cdd9e3e5bd4998fbf7661d8f994, type: 2}
+  _resetHealthChannel: {fileID: 11400000, guid: 3a993c786dfd93649bdc8c9f59318c6e, type: 2}
+  _sessionData: {fileID: 11400000, guid: 8dbc80fd39cfc334d97f91f13d298edb, type: 2}
 --- !u!1 &8932449565233812193
 GameObject:
   m_ObjectHideFlags: 0

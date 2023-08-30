@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2252454505271561317}
   - component: {fileID: 1550516262297888723}
   - component: {fileID: 6192280605531294491}
-  - component: {fileID: -836844692608373436}
+  - component: {fileID: 5584994530164908330}
   m_Layer: 11
   m_Name: Blob (Enemy)
   m_TagString: Enemy
@@ -233,7 +233,7 @@ MonoBehaviour:
   moveSpeed: 1
   facingRight: 1
   turningPauseDuration: 2
---- !u!114 &-836844692608373436
+--- !u!114 &5584994530164908330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,9 +242,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7919280039343655207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61ec3d5519105be40a8bf6b73f4d0b64, type: 3}
+  m_Script: {fileID: 11500000, guid: 98678e6e53419ce43ad9085459f63649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitpoints: 0
-  maxHitpoints: 2
-  destroyDelay: 0
+  currentHealth: 2
+  maxHealth: 2

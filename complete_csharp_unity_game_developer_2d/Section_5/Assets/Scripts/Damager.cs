@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Damager : MonoBehaviour
@@ -5,18 +6,17 @@ public class Damager : MonoBehaviour
     [SerializeField] private int damage = 1;
 
 
-    [Tooltip("These are the layers that this GameObject can deal damage to.")]
-    [SerializeField] private LayerMask layersToDamage;
+    [Tooltip("These are the tags that this GameObject can deal damage to.")]
+    [SerializeField] private string[] tagsToDamage;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject otherGameObject = collision.gameObject;
-        
-        // Check if the colliding object is within the layer mask
-        if ((1 << otherGameObject.layer & layersToDamage) == 0)
+
+        if (!Array.Exists(tagsToDamage, value => otherGameObject.CompareTag(value)))
             return;
-        
-        if (otherGameObject.TryGetComponent(out AbstractDamageable otherDamageable))
-            otherDamageable.ReceiveDamage(damage);
+
+        if (otherGameObject.TryGetComponent(out HealthManager healthManager))
+            healthManager.ChangeHealth(-damage);
     }
 }

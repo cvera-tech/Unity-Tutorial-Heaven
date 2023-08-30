@@ -4,7 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private PlayerHealthManager playerHealthManager;
+    [SerializeField] private IntEventChannelSO _playerHealthChangedChannel;
+    [SerializeField] private VoidEventChannelSO _resetPlayerHealthChannel;
+
     [SerializeField] private GameLevels gameLevels;
 
 
@@ -14,15 +16,26 @@ public class GameManager : MonoBehaviour
     [Tooltip("This is how long it takes to restart the current level after the player loses a life.")]
     [SerializeField] private float restartLevelDelay = 2f;
 
-    private void OnEnable() => playerHealthManager.healthChangeEvent.AddListener(HandlePlayerHealthChange);
-    private void OnDisable() => playerHealthManager.healthChangeEvent.RemoveListener(HandlePlayerHealthChange);
+    private void OnEnable() 
+    {
+        if (_playerHealthChangedChannel != null)
+            _playerHealthChangedChannel.OnEventRaised += HandlePlayerHealthChange;
+    }
+
+    private void OnDisable()
+    {
+        if (_playerHealthChangedChannel != null)
+            _playerHealthChangedChannel.OnEventRaised -= HandlePlayerHealthChange;
+    }
 
     private void HandlePlayerHealthChange(int health)
     {
-        Debug.Log("Player died!");
+        Debug.Log("Player died! Health = " + health);
         if (health <= 0)
         {
-            playerHealthManager.ResetHealth();
+            // Raise an event to reset the player health.
+            if (_resetPlayerHealthChannel != null)
+                _resetPlayerHealthChannel.RaiseEvent();
             StartCoroutine(LoadScene(gameLevels.Levels[0], resetGameDelay));
         }
         else

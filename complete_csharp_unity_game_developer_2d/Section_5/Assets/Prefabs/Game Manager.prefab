@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97103327e6482f247a2cd07760c72d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealthManager: {fileID: 11400000, guid: 048bd591f06075142907759b4f05018b, type: 2}
+  _playerHealthChangedChannel: {fileID: 11400000, guid: 8e871cdd9e3e5bd4998fbf7661d8f994, type: 2}
+  _resetPlayerHealthChannel: {fileID: 11400000, guid: 3a993c786dfd93649bdc8c9f59318c6e, type: 2}
   gameLevels: {fileID: 11400000, guid: 0dec87a6b2b95774d99b8a99630ec34d, type: 2}
   resetGameDelay: 2
   restartLevelDelay: 2
