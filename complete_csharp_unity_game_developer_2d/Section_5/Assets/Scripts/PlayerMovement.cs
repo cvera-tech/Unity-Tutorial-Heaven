@@ -22,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform bow;
     [SerializeField] private GameObject arrow;
 
+    [Header("Event Channel Listeners")]
+    [Tooltip("This channel raises events containing collisions that damage the player.")]
+    [SerializeField] private Collision2DEventChannelSO _damageSourcePositionChannel;
 
     private float defaultGravityScale;
     private bool isAlive;
@@ -35,7 +38,23 @@ public class PlayerMovement : MonoBehaviour
     private readonly string groundLayer = "Ground";
     private readonly string enemyLayer = "Enemy";
     private readonly string hazardLayer = "Hazard";
+    private readonly string enemyTag = "Enemy";
+    private readonly string hazardTag = "Hazard";
 
+
+    private void OnEnable()
+    {
+        if (_damageSourcePositionChannel != null)
+            _damageSourcePositionChannel.OnEventRaised += HandleDamagingCollision;
+        else
+            Debug.LogWarning("PlayerMovement was not assigned a Enemy Collided Channel."
+                + "Please assign a channel to enable proper player death physics.");
+    }
+    private void OnDisable()
+    {
+        if (_damageSourcePositionChannel != null)
+            _damageSourcePositionChannel.OnEventRaised -= HandleDamagingCollision;
+    }
 
     void Start()
     {
@@ -90,22 +109,6 @@ public class PlayerMovement : MonoBehaviour
             facingRight = moveInput.x > Mathf.Epsilon;
     }
 
-    // TODO: Remove and replace with new Damage system
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (IsTouchingLayer(cc2d, enemyLayer))
-        {
-            Vector3 collisionDirection = (collision.gameObject.GetComponent<Rigidbody2D>().transform.position - rb2d.transform.position).normalized;
-            Die(collisionDirection);
-        }
-        else if (IsTouchingLayer(cc2d, hazardLayer))
-        {
-            // We need to do it this way because the hazards tilemap's transform is at (0, 0, 0)
-            Vector2 collisionDirection = (collision.contacts[0].point - new Vector2(rb2d.transform.position.x, rb2d.transform.position.y)).normalized;
-            Die(collisionDirection);
-        }
-    }
-
     /*
         Custom methods
     */
@@ -134,6 +137,21 @@ public class PlayerMovement : MonoBehaviour
     private void FlipSprite(Transform transformToFlip)
     {
         transformToFlip.localScale = new Vector2(facingRight ? 1f : -1f, 1f);
+    }
+
+    private void HandleDamagingCollision(Collision2D collision, GameObject source)
+    {
+        if (source.CompareTag(enemyTag))
+        {
+            Vector3 collisionDirection = (source.GetComponent<Rigidbody2D>().transform.position - rb2d.transform.position).normalized;
+            Die(collisionDirection);
+        }
+        else if (source.CompareTag(hazardTag))
+        {
+            // We need to do it this way because the hazards tilemap's transform is at (0, 0, 0)
+            Vector2 collisionDirection = (collision.GetContact(0).point - new Vector2(rb2d.transform.position.x, rb2d.transform.position.y)).normalized;
+            Die(collisionDirection);
+        }
     }
 
     private bool HasHorizontalMoveInput() => Mathf.Abs(moveInput.x) > Mathf.Epsilon;
@@ -167,8 +185,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Removes collision with enemies
         rb2d.excludeLayers = LayerMask.GetMask(new string[] { enemyLayer, hazardLayer });
-
-        _playerHealthManager.ChangeHealth(-1);
     }
 
     // TODO: Should this be in a different class? See the "Weapon" class members above.

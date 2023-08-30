@@ -5,6 +5,9 @@ using UnityEngine;
 /// 
 /// Adapted from samyam's tutorial:
 /// https://www.youtube.com/watch?v=qUYpQ8ySkLU
+/// 
+/// As well as from the Unity Open Project:
+/// https://github.com/UnityTechnologies/open-project-1/
 /// </summary>
 public class PlayerHealthManager : HealthManager
 {

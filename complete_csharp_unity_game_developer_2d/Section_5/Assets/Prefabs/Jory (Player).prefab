@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 3074472297255284163}
   m_Layer: 8
   m_Name: Jory (Player)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -261,6 +261,7 @@ MonoBehaviour:
   knockbackVerticalSpeed: 5
   bow: {fileID: 4739829895833355700}
   arrow: {fileID: 1745276539979826098, guid: 5be9e29dfe7a047459dfae3e9da7badc, type: 3}
+  _damageSourcePositionChannel: {fileID: 11400000, guid: 6c1dfdc476a9c1140bb56e6c07b9a29c, type: 2}
 --- !u!114 &2952657261122490815
 MonoBehaviour:
   m_ObjectHideFlags: 0
