@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioClip: {fileID: 8300000, guid: bdd0f2eee97df9d418291723aad6c9a3, type: 3}
+  _scoreValue: 10
+  _scoreChangeChannel: {fileID: 11400000, guid: a4e9fd60d745cef4ba586791568a441a, type: 2}
 --- !u!58 &-7923459823443964688
 CircleCollider2D:
   m_ObjectHideFlags: 0

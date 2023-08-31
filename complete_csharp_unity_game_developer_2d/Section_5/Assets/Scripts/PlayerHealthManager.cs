@@ -21,16 +21,22 @@ public class PlayerHealthManager : HealthManager
     protected override void OnEnable()
     {
         if (!UseSessionData)
+        {
             base.OnEnable();
+        }
 
         if (_resetHealthChannel != null)
+        {
             _resetHealthChannel.OnEventRaised += ResetHealth;
+        }
     }
 
     private void OnDisable()
     {
         if (_resetHealthChannel != null)
+        {
             _resetHealthChannel.OnEventRaised -= ResetHealth;
+        }
     }
 
     /// <summary>
@@ -42,9 +48,14 @@ public class PlayerHealthManager : HealthManager
         if (UseSessionData)
         {
             _sessionData.PlayerHealth += amount;
-            _healthChangedChannel.RaiseEvent(_sessionData.PlayerHealth);
+            if (_healthChangedChannel != null)
+            {
+                _healthChangedChannel.RaiseEvent(_sessionData.PlayerHealth);
+            }
             if (_sessionData.PlayerHealth <= 0)
+            {
                 OnZeroHealth();
+            }
         }
         else
         {

@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         if (_damageSourcePositionChannel != null)
             _damageSourcePositionChannel.OnEventRaised += HandleDamagingCollision;
         else
-            Debug.LogWarning("PlayerMovement was not assigned a Enemy Collided Channel."
+            Debug.LogWarning("PlayerMovement was not assigned an Enemy Collided Channel. "
                 + "Please assign a channel to enable proper player death physics.");
     }
     private void OnDisable()
