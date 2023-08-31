@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CoinPickup : MonoBehaviour, Interactable
+public class CoinPickup : MonoBehaviour, IInteractable
 {
     [SerializeField] private AudioClip _audioClip;
     [SerializeField] private int _scoreValue;

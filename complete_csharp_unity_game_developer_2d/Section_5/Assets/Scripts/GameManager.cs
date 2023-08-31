@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private IntEventChannelSO _playerHealthChangedChannel;
     [SerializeField] private VoidEventChannelSO _resetPlayerHealthChannel;
+    [SerializeField] private VoidEventChannelSO _destroyScenePersistChannel;
 
     [SerializeField] private GameLevels gameLevels;
 
@@ -19,13 +20,17 @@ public class GameManager : MonoBehaviour
     private void OnEnable() 
     {
         if (_playerHealthChangedChannel != null)
+        {
             _playerHealthChangedChannel.OnEventRaised += HandlePlayerHealthChange;
+        }
     }
 
     private void OnDisable()
     {
         if (_playerHealthChangedChannel != null)
+        {
             _playerHealthChangedChannel.OnEventRaised -= HandlePlayerHealthChange;
+        }
     }
 
     private void HandlePlayerHealthChange(int health)
@@ -34,21 +39,25 @@ public class GameManager : MonoBehaviour
         {
             // Raise an event to reset the player health.
             if (_resetPlayerHealthChannel != null)
+            {
                 _resetPlayerHealthChannel.RaiseEvent();
-            StartCoroutine(LoadScene(gameLevels.Levels[0], resetGameDelay));
+            }
+            StartCoroutine(LoadScene(gameLevels.Levels[0], resetGameDelay, true));
         }
         else
         {
             string currentSceneName = SceneManager.GetActiveScene().name;
-            // int nextSceneNameIndex = Array.FindIndex(gameLevels.Levels, value => value == currentSceneName);
-            // string nextSceneName = gameLevels.Levels[nextSceneNameIndex];
-            StartCoroutine(LoadScene(currentSceneName, restartLevelDelay));
+            StartCoroutine(LoadScene(currentSceneName, restartLevelDelay, false));
         }
     }
 
-    private IEnumerator LoadScene(string sceneName, float delay)
+    private IEnumerator LoadScene(string sceneName, float delay, bool destroyScenePersist)
     {
         yield return new WaitForSecondsRealtime(delay);
+        if (destroyScenePersist)
+        {
+            _destroyScenePersistChannel.RaiseEvent();
+        }
         SceneManager.LoadScene(sceneName);
     }
 }

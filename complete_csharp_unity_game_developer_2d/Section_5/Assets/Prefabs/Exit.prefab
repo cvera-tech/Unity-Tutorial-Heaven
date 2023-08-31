@@ -143,6 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b35e3c7d646b8488fea6bf35ee3c91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene:
-    m_Handle: 0
+  nextSceneName: 
   delay: 1
+  _destroyScenePersistChannel: {fileID: 11400000, guid: 49c297b611e289e459b96bd417f5ba05, type: 2}
