@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed6d933009d43c429b24ecaff1bbc93, type: 3}
+  m_Name: Score Manager SO
+  m_EditorClassIdentifier: 
+  _sessionData: {fileID: 11400000, guid: 8dbc80fd39cfc334d97f91f13d298edb, type: 2}
+  _changeScoreChannel: {fileID: 11400000, guid: a4e9fd60d745cef4ba586791568a441a, type: 2}
+  _scoreUpdatedChannel: {fileID: 11400000, guid: 92f8a726395c171428dfa5deba2078ce, type: 2}
+  _resetScoreChannel: {fileID: 11400000, guid: 3a993c786dfd93649bdc8c9f59318c6e, type: 2}
