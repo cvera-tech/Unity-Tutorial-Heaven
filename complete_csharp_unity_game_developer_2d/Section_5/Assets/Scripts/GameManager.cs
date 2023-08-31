@@ -4,9 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // TODO: Reduce the number of events being raised.
+    // Reset player health, destroy scene persist, and reset score can all be condensed to one channel.
     [SerializeField] private IntEventChannelSO _playerHealthChangedChannel;
     [SerializeField] private VoidEventChannelSO _resetPlayerHealthChannel;
     [SerializeField] private VoidEventChannelSO _destroyScenePersistChannel;
+    [SerializeField] private VoidEventChannelSO _resetScoreChannel;
 
     [SerializeField] private GameLevels gameLevels;
 
@@ -41,6 +44,10 @@ public class GameManager : MonoBehaviour
             if (_resetPlayerHealthChannel != null)
             {
                 _resetPlayerHealthChannel.RaiseEvent();
+            }
+            if (_resetScoreChannel != null)
+            {
+                _resetScoreChannel.RaiseEvent();
             }
             StartCoroutine(LoadScene(gameLevels.Levels[0], resetGameDelay, true));
         }
