@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5881723847323584847}
   - component: {fileID: 7879714257281311348}
   - component: {fileID: 360588411668467745}
+  - component: {fileID: -2185834035992803932}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -193,11 +194,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67b9c8e8aa16ac4499f465ce94448fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  paddingLeft: 0.5
-  paddingRight: 5
-  paddingTop: 0.58
-  paddingBottom: 0.58
+  _moveSpeed: 10
+  _paddingLeft: 0
+  _paddingRight: 0
+  _paddingTop: 0
+  _paddingBottom: 0
 --- !u!114 &360588411668467745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,3 +213,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 30
   _currentHealth: 0
+--- !u!114 &-2185834035992803932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8781902465541269300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3635f7c7c73b1d9469a75d90c0aebbc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isFiring: 0
+  _fireDelay: 0.5
+  _projectileSpeed: 10
+  _projectileLifetime: 3
+  _projectilePrefab: {fileID: 8379154861021746924, guid: ec72549b9c97ca94aab53113ccef8436, type: 3}
