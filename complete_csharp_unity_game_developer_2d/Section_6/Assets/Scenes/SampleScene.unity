@@ -248,6 +248,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19f2ee4d3cf3067408d93109628fabc8, type: 2}
   - {fileID: 11400000, guid: 25e1357c199d96b49829475943d4dfb1, type: 2}
   _delayBetweenWaves: 1
+  _isLooping: 0
 --- !u!4 &788530752
 Transform:
   m_ObjectHideFlags: 0
@@ -263,58 +264,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1732770911 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8781902465541269300, guid: 2c97379e45a12e64da00072c778e1cd4, type: 3}
-  m_PrefabInstance: {fileID: 5740974152358986998}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1732770912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732770911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d67b9c8e8aa16ac4499f465ce94448fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  paddingLeft: 0.5
-  paddingRight: 5
-  paddingTop: 0.58
-  paddingBottom: 0.58
---- !u!114 &1732770913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732770911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 2e506d4d0b6eda746a6f142fdf736b8c, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1001 &837474377209523873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -484,13 +433,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8781902465541269300, guid: 2c97379e45a12e64da00072c778e1cd4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1732770913}
-    - targetCorrespondingSourceObject: {fileID: 8781902465541269300, guid: 2c97379e45a12e64da00072c778e1cd4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1732770912}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c97379e45a12e64da00072c778e1cd4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
