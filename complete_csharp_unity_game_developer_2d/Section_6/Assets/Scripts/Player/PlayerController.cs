@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         minBounds = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         maxBounds = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-        Debug.Log("Min = " + minBounds.ToString());
-        Debug.Log("Max = " + maxBounds.ToString());
+        // Debug.Log("Min = " + minBounds.ToString());
+        // Debug.Log("Max = " + maxBounds.ToString());
     }
 }

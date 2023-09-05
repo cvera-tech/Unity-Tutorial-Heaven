@@ -2,12 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Path Config")]
-public class PathConfigSO : ScriptableObject
+public class WaveConfigSO : ScriptableObject
 {
+    [SerializeField] private List<GameObject> _enemyPrefabs;
     [SerializeField] private Transform _pathPrefab;
     [SerializeField] private float _moveSpeed = 5f;
 
     public float MoveSpeed => _moveSpeed;
+
+    public int EnemyCount => _enemyPrefabs.Count;
 
     public List<Transform> Waypoints
     {
@@ -20,5 +23,10 @@ public class PathConfigSO : ScriptableObject
             }
             return waypoints;
         }
+    }
+    
+    public GameObject GetEnemyAtIndex(int index)
+    {
+        return _enemyPrefabs[index];
     }
 }

@@ -272,6 +272,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 25e1357c199d96b49829475943d4dfb1, type: 2}
     - target: {fileID: 5911910782329619458, guid: e3706fc45a2cceb48807756fef0dd672, type: 3}
+      propertyPath: _waveConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 25e1357c199d96b49829475943d4dfb1, type: 2}
+    - target: {fileID: 5911910782329619458, guid: e3706fc45a2cceb48807756fef0dd672, type: 3}
       propertyPath: pathConfigSO
       value: 
       objectReference: {fileID: 11400000, guid: 19f2ee4d3cf3067408d93109628fabc8, type: 2}
@@ -563,6 +567,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5911910782329619458, guid: e3706fc45a2cceb48807756fef0dd672, type: 3}
       propertyPath: _pathConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 19f2ee4d3cf3067408d93109628fabc8, type: 2}
+    - target: {fileID: 5911910782329619458, guid: e3706fc45a2cceb48807756fef0dd672, type: 3}
+      propertyPath: _waveConfig
       value: 
       objectReference: {fileID: 11400000, guid: 19f2ee4d3cf3067408d93109628fabc8, type: 2}
     - target: {fileID: 5911910782329619458, guid: e3706fc45a2cceb48807756fef0dd672, type: 3}
