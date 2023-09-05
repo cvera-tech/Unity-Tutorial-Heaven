@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f903bd3887752f4469a60b61d9eab70c, type: 3}
   m_Name: Path 0 Config
   m_EditorClassIdentifier: 
+  _enemyPrefabs:
+  - {fileID: 2319221402773715574, guid: e3706fc45a2cceb48807756fef0dd672, type: 3}
+  - {fileID: 2319221402773715574, guid: e3706fc45a2cceb48807756fef0dd672, type: 3}
+  - {fileID: 2319221402773715574, guid: e3706fc45a2cceb48807756fef0dd672, type: 3}
   _pathPrefab: {fileID: 4931840389431585631, guid: 6fee1fdbe5837e54fb4d893d5103ab68, type: 3}
   _moveSpeed: 3
+  _delayBetweenEnemySpawns: 1
+  _spawnDelayVariance: 0
+  _minimumSpawnDelay: 0.5
