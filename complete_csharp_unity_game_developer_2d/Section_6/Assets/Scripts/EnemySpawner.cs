@@ -29,7 +29,8 @@ public class EnemySpawner : MonoBehaviour
             {
                 for (int enemyIndex = 0; enemyIndex < CurrentWave.EnemyCount; enemyIndex++)
                 {
-                    Instantiate(CurrentWave.GetEnemyAtIndex(0), transform);
+                    GameObject currentEnemy = CurrentWave.GetEnemyAtIndex(enemyIndex);
+                    Instantiate(currentEnemy, Waypoints[0].position, Quaternion.Euler(0, 0, 90), transform);
                     yield return new WaitForSeconds(CurrentWave.GetRandomSpawnDelay());
                 }
                 yield return new WaitForSeconds(_delayBetweenWaves);
