@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_shooter != null)
         {
-            Debug.Log("Firing! " + inputValue.isPressed);
+            // Debug.Log("Firing! " + inputValue.isPressed);
             _shooter.IsFiring = inputValue.isPressed;
         }
     }

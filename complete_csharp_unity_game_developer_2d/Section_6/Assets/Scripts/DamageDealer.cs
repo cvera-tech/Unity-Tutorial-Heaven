@@ -3,6 +3,7 @@ using UnityEngine;
 public class DamageDealer : MonoBehaviour
 {
     [SerializeField] private int _damage;
+    [SerializeField] ParticleEventChannelSO _particleEventChannel;
 
     public int Damage { get => _damage; set => _damage = value; }
 
@@ -10,8 +11,11 @@ public class DamageDealer : MonoBehaviour
     {
         if (collider.gameObject.TryGetComponent(out Health health))
         {
-            Debug.Log("HIT");
             health.Subtract(Damage);
+            if (_particleEventChannel != null)
+            {
+                _particleEventChannel.RaiseEvent(collider);
+            }
             Destroy(gameObject);
         }
     }
