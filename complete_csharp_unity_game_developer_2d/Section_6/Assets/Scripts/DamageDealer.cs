@@ -4,6 +4,8 @@ public class DamageDealer : MonoBehaviour
 {
     [SerializeField] private int _damage;
     [SerializeField] ParticleEventChannelSO _particleEventChannel;
+    [Tooltip("If set, this component will send raise events on this channel when damage is dealt.")]
+    [SerializeField] private VoidEventChannelSO _cameraShakeEventChannel;
 
     public int Damage { get => _damage; set => _damage = value; }
 
@@ -15,6 +17,10 @@ public class DamageDealer : MonoBehaviour
             if (_particleEventChannel != null)
             {
                 _particleEventChannel.RaiseEvent(collider);
+            }
+            if (_cameraShakeEventChannel != null)
+            {
+                _cameraShakeEventChannel.RaiseEvent();
             }
             Destroy(gameObject);
         }

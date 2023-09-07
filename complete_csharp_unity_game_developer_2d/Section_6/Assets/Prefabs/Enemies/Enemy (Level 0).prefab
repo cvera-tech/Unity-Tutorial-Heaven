@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 10
   _particleEventChannel: {fileID: 11400000, guid: 7c778c4fb1afe2743b1ed2d23985e5aa, type: 2}
+  _cameraShakeEventChannel: {fileID: 11400000, guid: df7ae5e45357eac40a06bf6a78ee1c33, type: 2}
 --- !u!114 &5500749709088340598
 MonoBehaviour:
   m_ObjectHideFlags: 0
