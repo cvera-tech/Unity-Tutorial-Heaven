@@ -245,6 +245,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 30
   _currentHealth: 0
+  _audioEventChannel: {fileID: 11400000, guid: ddb0bb57f0a43d74eb921f3c2cf32876, type: 2}
+  _audioClip: {fileID: 8300000, guid: 98c3e0e42fdd5304b8d97b270f7d3025, type: 3}
+  _audioVolume: 0.8
 --- !u!114 &-2185834035992803932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,10 +260,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3635f7c7c73b1d9469a75d90c0aebbc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isFiring: 0
-  _attackSpeed: 2
-  _attackSpeedVariance: 0
   _projectilePrefab: {fileID: 8379154861021746924, guid: ec72549b9c97ca94aab53113ccef8436, type: 3}
+  _attackSpeed: 2
   _projectileDamage: 10
   _projectileLifetime: 3
   _projectileSpeed: 10
+  _useAI: 0
+  _attackSpeedVariance: 0
+  _audioEventChannel: {fileID: 11400000, guid: ddb0bb57f0a43d74eb921f3c2cf32876, type: 2}
+  _audioClip: {fileID: 8300000, guid: c50af850c05c85242a8b68da7d3f8ad5, type: 3}
+  _audioVolume: 0.3

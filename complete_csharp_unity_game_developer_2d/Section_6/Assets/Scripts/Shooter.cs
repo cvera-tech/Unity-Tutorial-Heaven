@@ -13,6 +13,12 @@ public class Shooter : MonoBehaviour
     [Header("AI")]
     [SerializeField] private bool _useAI = false;
     [SerializeField] private float _attackSpeedVariance = 0f;
+
+    [Header("Audio")]
+    [SerializeField] private AudioEventChannelSO _audioEventChannel;
+    [SerializeField] private AudioClip _audioClip;
+    [SerializeField, Range(0f, 1f)] private float _audioVolume;
+
     private bool _isFiring;
 
     public bool IsFiring { get => _isFiring; set => _isFiring = value; }
@@ -72,9 +78,18 @@ public class Shooter : MonoBehaviour
             {
                 projectileRigidbody.velocity = transform.up * _projectileSpeed;
             }
+            SendAudioEvent();
             Destroy(projectileInstance, _projectileLifetime);
             yield return new WaitForSeconds(AttackCooldown);
         }
         while (_isFiring);
+    }
+
+    private void SendAudioEvent()
+    {
+        if (_audioEventChannel != null && _audioClip != null)
+        {
+            _audioEventChannel.RaiseEvent(_audioClip, _audioVolume);
+        }
     }
 }

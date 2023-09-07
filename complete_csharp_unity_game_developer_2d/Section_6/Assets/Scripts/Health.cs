@@ -8,6 +8,11 @@ public class Health : MonoBehaviour
     public int CurrentHealth => _currentHealth;
     public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
 
+    [Header("Audio")]
+    [SerializeField] private AudioEventChannelSO _audioEventChannel;
+    [SerializeField] private AudioClip _audioClip;
+    [SerializeField, Range(0f, 1f)] private float _audioVolume;
+
     public void Start()
     {
         _currentHealth = _maxHealth;
@@ -23,7 +28,16 @@ public class Health : MonoBehaviour
         Add(-amount);
         if (_currentHealth == 0)
         {
+            SendAudioEvent();
             Destroy(gameObject);
+        }
+    }
+
+    private void SendAudioEvent()
+    {
+        if (_audioEventChannel != null && _audioClip != null)
+        {
+            _audioEventChannel.RaiseEvent(_audioClip, _audioVolume);
         }
     }
 }

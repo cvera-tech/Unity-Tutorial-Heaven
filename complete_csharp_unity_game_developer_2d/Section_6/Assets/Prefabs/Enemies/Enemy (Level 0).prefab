@@ -127,6 +127,9 @@ MonoBehaviour:
   _damage: 10
   _particleEventChannel: {fileID: 11400000, guid: 7c778c4fb1afe2743b1ed2d23985e5aa, type: 2}
   _cameraShakeEventChannel: {fileID: 11400000, guid: df7ae5e45357eac40a06bf6a78ee1c33, type: 2}
+  _audioEventChannel: {fileID: 11400000, guid: ddb0bb57f0a43d74eb921f3c2cf32876, type: 2}
+  _audioClip: {fileID: 8300000, guid: 20e98ba8af9bf114e86398e9eb309507, type: 3}
+  _audioVolume: 0.4
 --- !u!114 &5500749709088340598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +144,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 15
   _currentHealth: 0
+  _audioEventChannel: {fileID: 0}
+  _audioClip: {fileID: 0}
+  _audioVolume: 0
 --- !u!114 &7414854968424192893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +166,9 @@ MonoBehaviour:
   _projectileSpeed: 5
   _useAI: 1
   _attackSpeedVariance: 0.5
+  _audioEventChannel: {fileID: 11400000, guid: ddb0bb57f0a43d74eb921f3c2cf32876, type: 2}
+  _audioClip: {fileID: 8300000, guid: c50af850c05c85242a8b68da7d3f8ad5, type: 3}
+  _audioVolume: 0.3
 --- !u!1 &6807230072386320481
 GameObject:
   m_ObjectHideFlags: 0

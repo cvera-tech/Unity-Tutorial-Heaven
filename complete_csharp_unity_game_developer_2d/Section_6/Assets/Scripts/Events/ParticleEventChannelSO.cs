@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "Event Channels/Particle Event Channel")]
+[CreateAssetMenu(menuName = "Event Channels/Particle")]
 public class ParticleEventChannelSO : ScriptableObject
 {
     public UnityAction<Collider2D> OnEventRaised;
