@@ -629,6 +629,52 @@ Transform:
   - {fileID: 328354502}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1767706624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1767706626}
+  - component: {fileID: 1767706625}
+  m_Layer: 0
+  m_Name: Score Keeper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1767706625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767706624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d7a86bdb3097841ba4cb7e697980bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreChangeEventChannel: {fileID: 11400000, guid: 5ce24460e74066c44bf8a08250d719bb, type: 2}
+  _scoreScriptableObject: {fileID: 11400000, guid: 4ec1bb55e571b374ca9f18a9ceeff178, type: 2}
+--- !u!4 &1767706626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767706624}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &837474377209523873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -821,3 +867,4 @@ SceneRoots:
   - {fileID: 940824295}
   - {fileID: 53297913}
   - {fileID: 404048969}
+  - {fileID: 1767706626}

@@ -147,6 +147,9 @@ MonoBehaviour:
   _audioEventChannel: {fileID: 0}
   _audioClip: {fileID: 0}
   _audioVolume: 0
+  _shouldChangeScore: 1
+  _scoreChangeEventChannel: {fileID: 11400000, guid: 5ce24460e74066c44bf8a08250d719bb, type: 2}
+  _scoreValue: 50
 --- !u!114 &7414854968424192893
 MonoBehaviour:
   m_ObjectHideFlags: 0

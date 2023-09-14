@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Health : MonoBehaviour
 {
@@ -13,7 +14,12 @@ public class Health : MonoBehaviour
     [SerializeField] private AudioClip _audioClip;
     [SerializeField, Range(0f, 1f)] private float _audioVolume;
 
-    public void Start()
+    [Header("Score")]
+    [SerializeField] private bool _shouldChangeScore = false;
+    [SerializeField] private IntEventChannelSO _scoreChangeEventChannel;
+    [SerializeField] private int _scoreValue = 0;
+
+    private void Start()
     {
         _currentHealth = _maxHealth;
     }
@@ -29,6 +35,7 @@ public class Health : MonoBehaviour
         if (_currentHealth == 0)
         {
             SendAudioEvent();
+            SendScoreChangeEvent();
             Destroy(gameObject);
         }
     }
@@ -38,6 +45,14 @@ public class Health : MonoBehaviour
         if (_audioEventChannel != null && _audioClip != null)
         {
             _audioEventChannel.RaiseEvent(_audioClip, _audioVolume);
+        }
+    }
+
+    private void SendScoreChangeEvent()
+    {
+        if (_shouldChangeScore && _scoreChangeEventChannel != null)
+        {
+            _scoreChangeEventChannel.RaiseEvent(_scoreValue);
         }
     }
 }
