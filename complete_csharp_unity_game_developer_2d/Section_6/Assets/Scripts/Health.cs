@@ -1,41 +1,78 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private int _maxHealth;
     [SerializeField] private int _currentHealth;
+    [SerializeField] private bool _shouldUseScriptableObject = false;
+    [SerializeField] private HealthSO _healthScriptableObject;
+    [SerializeField] private VoidEventChannelSO _healthUpdatedEventChannel;
 
-    public int CurrentHealth => _currentHealth;
-    public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
 
     [Header("Audio")]
     [SerializeField] private AudioEventChannelSO _audioEventChannel;
     [SerializeField] private AudioClip _audioClip;
     [SerializeField, Range(0f, 1f)] private float _audioVolume;
 
-    [Header("Score")]
-    [SerializeField] private bool _shouldChangeScore = false;
-    [SerializeField] private IntEventChannelSO _scoreChangeEventChannel;
-    [SerializeField] private int _scoreValue = 0;
+    public int CurrentHealth => _currentHealth;
+    public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+
+    private ScoreValue _scoreValue;
 
     private void Start()
     {
+        if (_shouldUseScriptableObject)
+        {
+            if (_healthScriptableObject == null)
+            {
+                Debug.LogWarning(this.name + " has no assigned HealthSO!");
+            }
+            else
+            {
+                _healthScriptableObject.Value = _healthScriptableObject.MaxValue;
+            }
+            
+            if (_healthUpdatedEventChannel == null)
+            {
+                Debug.LogWarning(this.name + " has no assigned Health Updated Event Channel!");
+            }
+        }
         _currentHealth = _maxHealth;
+
+
+        // TODO: Decouple this?
+        TryGetComponent(out _scoreValue);
     }
 
     public void Add(int amount)
     {
-        _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, _maxHealth);
+        if (_shouldUseScriptableObject)
+        {
+            _healthScriptableObject.Value = Mathf.Clamp(
+                _healthScriptableObject.Value + amount,
+                0,
+                _healthScriptableObject.MaxValue
+            );
+
+            SendHealthUpdatedEvent();
+        }
+        else
+        {
+            _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, _maxHealth);
+        }
     }
 
     public void Subtract(int amount)
     {
         Add(-amount);
-        if (_currentHealth == 0)
+        int health = _shouldUseScriptableObject ? _healthScriptableObject.Value : _currentHealth;
+        if (health == 0)
         {
             SendAudioEvent();
-            SendScoreChangeEvent();
+            if (_scoreValue != null)
+            {
+                _scoreValue.SendScoreChangeEvent();
+            }
             Destroy(gameObject);
         }
     }
@@ -48,11 +85,11 @@ public class Health : MonoBehaviour
         }
     }
 
-    private void SendScoreChangeEvent()
+    private void SendHealthUpdatedEvent()
     {
-        if (_shouldChangeScore && _scoreChangeEventChannel != null)
+        if (_healthUpdatedEventChannel != null)
         {
-            _scoreChangeEventChannel.RaiseEvent(_scoreValue);
+            _healthUpdatedEventChannel.RaiseEvent();
         }
     }
 }

@@ -38,7 +38,7 @@ public class CameraShake : MonoBehaviour
 
     private void HandleCameraShakeEvent()
     {
-        Debug.Log("Camera shake event received!");
+        // Debug.Log("Camera shake event received!");
         StartCoroutine(Shake());
     }
 

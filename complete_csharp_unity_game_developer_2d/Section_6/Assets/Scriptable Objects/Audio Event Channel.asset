@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffbbb99412e10f2499f85b842506b00a, type: 3}
-  m_Name: Score Change Channel
+  m_Script: {fileID: 11500000, guid: bff5c8fe080bceb4ebde572aabafb561, type: 3}
+  m_Name: Audio Event Channel
   m_EditorClassIdentifier: 

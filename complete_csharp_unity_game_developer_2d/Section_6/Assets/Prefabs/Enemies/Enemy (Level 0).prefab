@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4110073900191875562}
   - component: {fileID: 5500749709088340598}
   - component: {fileID: 7414854968424192893}
+  - component: {fileID: -3309040743579910353}
   m_Layer: 7
   m_Name: Enemy (Level 0)
   m_TagString: Untagged
@@ -147,9 +148,6 @@ MonoBehaviour:
   _audioEventChannel: {fileID: 0}
   _audioClip: {fileID: 0}
   _audioVolume: 0
-  _shouldChangeScore: 1
-  _scoreChangeEventChannel: {fileID: 11400000, guid: 5ce24460e74066c44bf8a08250d719bb, type: 2}
-  _scoreValue: 50
 --- !u!114 &7414854968424192893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +170,21 @@ MonoBehaviour:
   _audioEventChannel: {fileID: 11400000, guid: ddb0bb57f0a43d74eb921f3c2cf32876, type: 2}
   _audioClip: {fileID: 8300000, guid: c50af850c05c85242a8b68da7d3f8ad5, type: 3}
   _audioVolume: 0.3
+--- !u!114 &-3309040743579910353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319221402773715574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6ff6b70d8e8764e8246c295bd21d79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shouldGrantPointsOnDestroy: 1
+  _scoreChangeEventChannel: {fileID: 11400000, guid: 5ce24460e74066c44bf8a08250d719bb, type: 2}
+  _amount: 50
 --- !u!1 &6807230072386320481
 GameObject:
   m_ObjectHideFlags: 0

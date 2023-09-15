@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189316cc9f56db54e97966783a04cb04, type: 3}
-  m_Name: Particle Event Channel SO
+  m_Script: {fileID: 11500000, guid: 6fe7b4dadca969749a03100f9eee5d38, type: 3}
+  m_Name: Score Updated Event Channel
   m_EditorClassIdentifier: 
