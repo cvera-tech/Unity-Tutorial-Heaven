@@ -11,8 +11,11 @@ public class Health : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioEventChannelSO _audioEventChannel;
-    [SerializeField] private AudioClip _audioClip;
+    [SerializeField] private AudioClip _deathAudioClip;
     [SerializeField, Range(0f, 1f)] private float _audioVolume;
+
+    [Header("Player-Specific Fields")]
+    [SerializeField] private VoidEventChannelSO _playerDiedEventChannel;
 
     public int CurrentHealth => _currentHealth;
     public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
@@ -73,15 +76,19 @@ public class Health : MonoBehaviour
             {
                 _scoreValue.SendScoreChangeEvent();
             }
+            if (_playerDiedEventChannel != null)
+            {
+                _playerDiedEventChannel.RaiseEvent();
+            }
             Destroy(gameObject);
         }
     }
 
     private void SendAudioEvent()
     {
-        if (_audioEventChannel != null && _audioClip != null)
+        if (_audioEventChannel != null && _deathAudioClip != null)
         {
-            _audioEventChannel.RaiseEvent(_audioClip, _audioVolume);
+            _audioEventChannel.RaiseEvent(_deathAudioClip, _audioVolume);
         }
     }
 

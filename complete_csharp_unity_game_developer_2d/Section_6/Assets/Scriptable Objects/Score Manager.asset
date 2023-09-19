@@ -10,5 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aae4e84309f16f44c8658fba6ddc6c88, type: 3}
-  m_Name: Score
+  m_Name: Score Manager
   m_EditorClassIdentifier: 
+  _scoreChangeEventChannel: {fileID: 11400000, guid: 5ce24460e74066c44bf8a08250d719bb, type: 2}
+  _scoreResetEventChannel: {fileID: 11400000, guid: bab47c1a1f3ef19408a14c337eefcd28, type: 2}
+  _scoreUpdatedEventChannel: {fileID: 11400000, guid: 82d6537d88632f541841298456fe8750, type: 2}

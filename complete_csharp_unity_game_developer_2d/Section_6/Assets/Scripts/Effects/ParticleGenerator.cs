@@ -10,11 +10,11 @@ public class ParticleGenerator : MonoBehaviour
     {
         if (_particleEventChannel != null)
         {
-            _particleEventChannel.OnEventRaised += HandleParticleEvent;
+            _particleEventChannel.Subscribe(HandleParticleEvent);
         }
         else
         {
-            Debug.LogWarning(this.name + " has no assigned Particle Event Channel!");
+            Debug.LogWarning(name + " has no assigned Particle Event Channel!");
         }
     }
 
@@ -22,7 +22,7 @@ public class ParticleGenerator : MonoBehaviour
     {
         if (_particleEventChannel != null)
         {
-            _particleEventChannel.OnEventRaised -= HandleParticleEvent;
+            _particleEventChannel.Unsubscribe(HandleParticleEvent);
         }
     }
 

@@ -4,14 +4,17 @@ using UnityEngine;
 public class ScoreTextUpdater : MonoBehaviour
 {
     [SerializeField] private VoidEventChannelSO _scoreUpdatedEventChannel;
-    [SerializeField] private ScoreSO _scoreScriptableObject;
+    [SerializeField] private ScoreManagerSO _scoreScriptableObject;
 
     private TextMeshProUGUI _text;
 
-    private void OnEnable()
+    private void Awake()
     {
         _text = GetComponent<TextMeshProUGUI>();
+    }
 
+    private void OnEnable()
+    {
         if (_scoreUpdatedEventChannel != null)
         {
             _scoreUpdatedEventChannel.Subscribe(HandleScoreUpdatedEvent);
@@ -28,6 +31,12 @@ public class ScoreTextUpdater : MonoBehaviour
         {
             _scoreUpdatedEventChannel.Unsubscribe(HandleScoreUpdatedEvent);
         }
+    }
+
+    private void Start()
+    {
+        // Set initial score text
+        HandleScoreUpdatedEvent();
     }
 
     private void HandleScoreUpdatedEvent()

@@ -1,24 +1,16 @@
 using UnityEngine;
 
-public class ScoreKeeper : MonoBehaviour
+[CreateAssetMenu(menuName = "Score Manager")]
+public class ScoreManagerSO : ScriptableObject
 {
     [SerializeField] private IntEventChannelSO _scoreChangeEventChannel;
     [SerializeField] private VoidEventChannelSO _scoreResetEventChannel;
     [SerializeField] private VoidEventChannelSO _scoreUpdatedEventChannel;
-    [SerializeField] private ScoreManagerSO _scoreScriptableObject;
 
-    private void Awake()
-    {
-        if (FindObjectsOfType<ScoreKeeper>().Length > 1)
-        {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-    }
+    private int _score;
+
+    public int Score { get => _score; private set => _score = value; }
+
     private void OnEnable()
     {
         if (_scoreChangeEventChannel != null)
@@ -54,14 +46,14 @@ public class ScoreKeeper : MonoBehaviour
 
     private void HandleScoreChangeEvent(int scoreValue)
     {
-        // _scoreScriptableObject.Score += scoreValue;
+        Score += scoreValue;
         SendScoreUpdatedEvent();
         // Debug.Log(_scoreScriptableObject.Score);
     }
 
     private void HandleScoreResetEvent()
     {
-        // _scoreScriptableObject.Score = 0;
+        Score = 0;
         SendScoreUpdatedEvent();
     }
 

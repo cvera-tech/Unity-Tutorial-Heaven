@@ -8,7 +8,7 @@ public class IntEventChannelSO : ScriptableObject
 
     public void RaiseEvent(int value)
     {
-        OnEventRaised(value);
+        OnEventRaised?.Invoke(value);
     }
 
     public void Subscribe(UnityAction<int> eventHandler)
