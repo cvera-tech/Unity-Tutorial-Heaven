@@ -41,3 +41,20 @@ Despite the title, this game is less a Metdroidvania and more a basic platformer
 Similar to the previous section, I modified the architecture of the game significantly compared to what was presented in the lectures. I discovered the [Unity Open Project](https://github.com/UnityTechnologies/open-project-1), and finally made sense of how to create and use a ScriptableObject-based event system. Scene loading and player score and health management were written to be event-based instead of relying on hard references between components. I also added a Scriptable Object to hold session data, which I was quite pleased with since it removed the need to have a singleton GameObject to keep track of data between scene loads.
 
 Overall, I found this section to be both incredibly challenging and incredibly rewarding. Had I followed what Rick Davidson instructed, I might have saved myself a lot of trouble and finished much earlier. Slowing down and thinking carefully about the game's architecture was a better decision, I think, since I learned a lot about how to design components that work together without being tightly coupled. Besides, I think developing proper habits as early as possible is better than having to unlearn some bad habits borne of doing things the quick and dirty way.
+
+### 5. [Section 6: Laser Defender](Section_6)
+
+This section took the longest to complete not because of any appreciable increase in difficulty in the project, but moreso that I was becoming a bit bored of the material. The game is a top-down space-themed shooter. Among the concepts and features covered in the project are:
+
+* Number clamping
+* 2D path creation
+* Game object instantiation at runtime with loops
+* DontDestroyOnLoad and singletons
+* Texture scrolling
+* Background music
+
+Much of these were already covered in the previous section, which made this section less engaging for me. Once again, I veered away from the lectures by using Scriptable Objects for an event system and data persistence instead of singleton game objects.
+
+## Final Thoughts
+
+This course was dense and overall quite fun to go through. None of the programming concepts presented were new to me, but I learned much about working with the Unity editor. I also branched off and learned how to make use of Scriptable Objects to reduce component coupling and to persist data between scenes.
