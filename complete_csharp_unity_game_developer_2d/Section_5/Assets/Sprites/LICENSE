@@ -1,5 +1,4 @@
-Script code, scenes, prefabs, and sprites I added are provided under the MIT
-License. All other assets are covered by their respective license terms.
+The image files in this folder is covered by the MIT License
 
 MIT License
 
@@ -22,3 +21,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Files in the subfolders are covered by the license terms of the included
+LICENSE files.
